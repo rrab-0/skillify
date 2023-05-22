@@ -11,5 +11,12 @@ class SignUpActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySignUpBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        supportActionBar?.hide()
+
+        binding.tvLoginRegister.setOnClickListener {
+            val registerToLogin = Intent(this@SignUpActivity, SignInActivity::class.java)
+            startActivity(registerToLogin)
+        }
     }
 }
