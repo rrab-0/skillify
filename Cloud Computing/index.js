@@ -12,6 +12,9 @@ app.use(cors());
 app.use(bodyParser.json());
 
 app.use('/api', userRoutes.routes);
+app.get('/', (req, res) => {
+  res.send('hello world');
+});
 
 app.listen(config.port, () =>
   console.log(`app listens on http://localhost:${config.port}`)
