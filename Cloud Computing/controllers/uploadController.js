@@ -16,7 +16,7 @@ const uploadFile = async (req, res) => {
 
     const storageRef = ref(
       storage,
-      `files/${req.file.originalname + '       ' + dateTime}`
+      `files/${req.file.originalname + '       (' + dateTime + ')'}`
     );
 
     // Create file metadata including the content type
@@ -53,7 +53,7 @@ const giveCurrentDateTime = () => {
     today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
   const time =
     today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
-  const dateTime = date + ' ' + time;
+  const dateTime = time + ' and ' + date;
   return dateTime;
 };
 
