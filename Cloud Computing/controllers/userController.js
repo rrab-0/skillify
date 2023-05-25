@@ -2,21 +2,12 @@
 
 const db = require('../db');
 const User = require('../models/user');
-const multer = require('multer');
-// cloud storage firebase
-const {
-  getStorage,
-  ref,
-  getDownloadURL,
-  uploadBytesResumeable,
-} = require('firebase/storage');
+
 // firestore firebase
 const { getFirestore } = require('firebase/firestore');
 const { doc, setDoc } = require('firebase/firestore');
 
-const storage = getStorage();
 const actualDb = getFirestore(db);
-const upload = multer({ storage: multer.memoryStorage() });
 
 const addUser = async (req, res) => {
   try {
