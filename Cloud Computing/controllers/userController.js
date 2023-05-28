@@ -13,7 +13,8 @@ const addUser = async (req, res) => {
   try {
     const data = req.body;
     await setDoc(doc(actualDb, 'users', 'users-data'), data);
-    res.send('Record saved successfuly');
+    console.log('record saved');
+    res.send('record saved successfuly');
   } catch (error) {
     res.status(400).send(error.message);
   }
