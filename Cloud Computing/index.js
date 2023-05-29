@@ -18,6 +18,11 @@ app.get('/', (req, res) => {
   res.send('hello world');
 });
 
-app.listen(config.port, () =>
-  console.log(`app listens on http://localhost:${config.port}`)
-);
+// app.listen(config.port, () =>
+//   console.log(`app listens on http://localhost:${config.port}`)
+// );
+
+const port = parseInt(process.env.PORT) || 8080;
+app.listen(port, () => {
+  console.log(`helloworld: listening on port ${port}`);
+});
