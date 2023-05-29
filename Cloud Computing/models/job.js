@@ -1,6 +1,6 @@
-class Jobs {
+class Job {
   constructor(
-    id,
+    userId,
     jobTitle,
     description,
     qualifications,
@@ -8,7 +8,7 @@ class Jobs {
     address,
     contacts
   ) {
-    this.id = id;
+    this.userId = userId;
     this.jobTitle = jobTitle;
     this.description = description;
     this.qualifications = qualifications;
@@ -18,4 +18,4 @@ class Jobs {
   }
 }
 
-module.exports = Jobs;
+module.exports = Job;

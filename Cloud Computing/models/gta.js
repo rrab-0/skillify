@@ -13,3 +13,13 @@
     "email": "your@mail.com",
     "links": "this should be an array of links from cloud storage"
 }
+
+
+{
+  "jobTitle": "example",
+  "description": "example",
+  "qualifications": "example",
+  "companyName": "example",
+  "address": "example",
+  "contacts": "example"
+}
