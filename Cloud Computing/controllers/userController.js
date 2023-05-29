@@ -23,6 +23,15 @@ const addUser = async (req, res) => {
   }
 };
 
+const getUser = async (req, res) => {
+  try {
+    res.send('user datas');
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
+};
+
 module.exports = {
   addUser,
+  getUser,
 };
