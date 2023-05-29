@@ -22,7 +22,7 @@ app.get('/', (req, res) => {
 //   console.log(`app listens on http://localhost:${config.port}`)
 // );
 
-const port = parseInt(process.env.PORT) || 8080;
+const port = config.port || 8080;
 app.listen(port, () => {
   console.log(`helloworld: listening on port ${port}`);
 });
