@@ -33,9 +33,19 @@ const addUser = async (req, res) => {
 
 const getUserId = async (req, res) => {
   try {
-    const userIdDocRef = doc(actualDb, 'users', uuid);
+    const userId = req.params.id;
+    const userIdDocRef = doc(actualDb, 'users', userId);
     const userData = await getDoc(userIdDocRef);
-    res.send(userData);
+
+    if (!userData.exists()) {
+      res.status(404).send("User not found");
+    } else {
+      const userWithId = {
+        id: userId,
+        ...userData.data()
+      };
+      res.send(userWithId);
+    }
   } catch (error) {
     res.status(400).send(error.message);
   }
