@@ -31,7 +31,7 @@ const addUser = async (req, res) => {
   }
 };
 
-const getUserId = async (res) => {
+const getUserId = async (req, res) => {
   try {
     const userIdDocRef = doc(actualDb, 'users', uuid);
     const userData = await getDoc(userIdDocRef);
