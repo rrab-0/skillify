@@ -15,7 +15,7 @@ app.use('/user', userRoutes.routes);
 app.use('/job', jobRoutes.routes);
 app.use('/upload', uploadRoutes.routes);
 app.get('/', (req, res) => {
-  res.send('hello world');
+  res.send('service is up and running');
 });
 
 // app.listen(config.port, () =>
@@ -24,5 +24,5 @@ app.get('/', (req, res) => {
 
 const port = config.port || 8080;
 app.listen(port, () => {
-  console.log(`helloworld: listening on port ${port}`);
+  console.log(`listening on port http://localhost:${port}`);
 });
