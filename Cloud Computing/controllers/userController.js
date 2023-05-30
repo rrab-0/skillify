@@ -45,7 +45,16 @@ const getAllUser = async (req, res) => {
   try {
     const allUserDoc = collection(actualDb, 'users');
     const allUserData = await getDocs(allUserDoc);
-    res.send(allUserData);
+    let responseArr = [];
+    allUserData.forEach((doc) => {
+      const userData = doc.data();
+      const responseObject = {
+        id: doc.id,
+        ...userData,
+      };
+      responseArr.push(responseObject);
+    });
+    res.send(responseArr);
   } catch (error) {
     res.status(400).send(error.message);
   }
