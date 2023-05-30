@@ -24,7 +24,7 @@ const addUser = async (req, res) => {
     const userDoc = doc(actualDb, 'users', uuid);
     await setDoc(userDoc, data);
 
-    res.redirect('/user/get-user-id');
+    res.redirect(`/user/get-user-id/${uuid}`);
     console.log(`${uuid} record saved`);
   } catch (error) {
     res.status(400).send(error.message);
