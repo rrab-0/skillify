@@ -14,6 +14,11 @@ class SignInActivity : AppCompatActivity() {
 
         supportActionBar?.hide()
 
+        binding.btnLogin2.setOnClickListener {
+            val toHome = Intent(this@SignInActivity, HomeActivity::class.java)
+            startActivity(toHome)
+        }
+
         binding.tvSignup.setOnClickListener {
             val btnToRegister2 = Intent(this@SignInActivity, SignUpActivity::class.java)
             startActivity(btnToRegister2)
