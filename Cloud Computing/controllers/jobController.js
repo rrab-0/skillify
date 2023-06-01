@@ -7,18 +7,20 @@ const {
   getFirestore,
   getDoc,
   collection,
+  query,
   where,
   orderBy,
+  getDocs,
 } = require('firebase/firestore');
 const { doc, setDoc } = require('firebase/firestore');
 const actualDb = getFirestore(db);
 // uuid
 const { v4: uuidv4 } = require('uuid');
 // variable generates uuidv4 once
-const uuid = uuidv4();
 
 const addJob = async (req, res) => {
   try {
+    const uuid = uuidv4();
     const data = req.body;
     const jobDoc = doc(actualDb, 'jobs', uuid);
     await setDoc(jobDoc, data);
@@ -58,13 +60,17 @@ const getAllJobOfOneUser = async (req, res) => {
       allJobCollection,
       where('userId', '==', userIdOfJob)
     );
-    const allJobOfOneUserSnapshot = await getDoc(allJobOfOneUserQuery);
 
-    if (!allJobOfOneUserSnapshot.exists()) {
-      res.status(404).send('No jobs found');
-    } else {
-      res.send(...allJobOfOneUserSnapshot.data());
-    }
+    const allJobOfOneUserSnapshot = await getDocs(allJobOfOneUserQuery);
+
+    allJobOfOneUserSnapshot.forEach((doc) => {
+      res.send(doc.data());
+    });
+    // if (!allJobOfOneUserSnapshot.exists()) {
+    //   res.status(404).send('No jobs found');
+    // } else {
+    //   res.send(...allJobOfOneUserSnapshot.data());
+    // }
   } catch (error) {
     res.status(400).send(error.message);
   }

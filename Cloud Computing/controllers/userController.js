@@ -36,11 +36,11 @@ const getUserId = async (req, res) => {
     const userData = await getDoc(userIdDocRef);
 
     if (!userData.exists()) {
-      res.status(404).send("User not found");
+      res.status(404).send('User not found');
     } else {
       const userWithId = {
         id: userId,
-        ...userData.data()
+        ...userData.data(),
       };
       res.send(userWithId);
     }
