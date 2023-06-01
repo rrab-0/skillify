@@ -14,11 +14,10 @@ const {
 const actualDb = getFirestore(db);
 // uuid
 const { v4: uuidv4 } = require('uuid');
-// variable generates uuidv4 once
-const uuid = uuidv4();
 
 const addUser = async (req, res) => {
   try {
+    const uuid = uuidv4();
     const data = req.body;
     const userDoc = doc(actualDb, 'users', uuid);
     await setDoc(userDoc, data);
@@ -37,11 +36,11 @@ const getUserId = async (req, res) => {
     const userData = await getDoc(userIdDocRef);
 
     if (!userData.exists()) {
-      res.status(404).send('User not found');
+      res.status(404).send("User not found");
     } else {
       const userWithId = {
         id: userId,
-        ...userData.data(),
+        ...userData.data()
       };
       res.send(userWithId);
     }
@@ -52,8 +51,8 @@ const getUserId = async (req, res) => {
 
 const getAllUser = async (req, res) => {
   try {
-    const allUserCollection = collection(actualDb, 'users');
-    const allUserData = await getDocs(allUserCollection);
+    const allUserDoc = collection(actualDb, 'users');
+    const allUserData = await getDocs(allUserDoc);
     let responseArr = [];
     allUserData.forEach((doc) => {
       const userData = doc.data();
