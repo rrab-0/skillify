@@ -54,18 +54,26 @@ const getJobId = async (req, res) => {
 
 const getAllJobOfOneUser = async (req, res) => {
   try {
-    const userIdOfJob = req.params.userId;
+    // const userIdOfJob = req.params.userId;
+    const { userId } = req.query;
     const allJobCollection = collection(actualDb, 'jobs');
     const allJobOfOneUserQuery = query(
       allJobCollection,
-      where('userId', '==', userIdOfJob)
+      where('userId', '==', `${userId}`)
     );
-
     const allJobOfOneUserSnapshot = await getDocs(allJobOfOneUserQuery);
 
+    let responseArr = [];
     allJobOfOneUserSnapshot.forEach((doc) => {
-      res.send(doc.data());
+      const data = doc.data();
+      const responseObject = {
+        id: doc.id,
+        userId: doc.userId,
+        ...data,
+      };
+      responseArr.push(responseObject);
     });
+    res.send(responseArr);
     // if (!allJobOfOneUserSnapshot.exists()) {
     //   res.status(404).send('No jobs found');
     // } else {
