@@ -20,7 +20,6 @@ const uuid = uuidv4();
 const addUser = async (req, res) => {
   try {
     const data = req.body;
-
     const userDoc = doc(actualDb, 'users', uuid);
     await setDoc(userDoc, data);
 
@@ -38,11 +37,11 @@ const getUserId = async (req, res) => {
     const userData = await getDoc(userIdDocRef);
 
     if (!userData.exists()) {
-      res.status(404).send("User not found");
+      res.status(404).send('User not found');
     } else {
       const userWithId = {
         id: userId,
-        ...userData.data()
+        ...userData.data(),
       };
       res.send(userWithId);
     }
@@ -53,8 +52,8 @@ const getUserId = async (req, res) => {
 
 const getAllUser = async (req, res) => {
   try {
-    const allUserDoc = collection(actualDb, 'users');
-    const allUserData = await getDocs(allUserDoc);
+    const allUserCollection = collection(actualDb, 'users');
+    const allUserData = await getDocs(allUserCollection);
     let responseArr = [];
     allUserData.forEach((doc) => {
       const userData = doc.data();

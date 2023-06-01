@@ -9,6 +9,7 @@ class Job {
     contacts
   ) {
     this.userId = userId;
+    this.id = id;
     this.jobTitle = jobTitle;
     this.description = description;
     this.qualifications = qualifications;
