@@ -41,9 +41,16 @@ const getJobId = async (req, res) => {
     if (!jobData.exists()) {
       res.status(404).send('Job not found');
     } else {
+      const data = jobData.data();
       const jobWithId = {
         id: jobId,
-        ...jobData.data(),
+        userId: data.userId,
+        jobTitle: data.jobTitle,
+        description: data.description,
+        qualifications: data.qualifications,
+        companyName: data.companyName,
+        address: data.address,
+        contacts: data.contacts,
       };
       res.send(jobWithId);
     }
@@ -68,8 +75,13 @@ const getAllJobOfOneUser = async (req, res) => {
       const data = doc.data();
       const responseObject = {
         id: doc.id,
-        userId: doc.userId,
-        ...data,
+        userId: data.userId,
+        jobTitle: data.jobTitle,
+        description: data.description,
+        qualifications: data.qualifications,
+        companyName: data.companyName,
+        address: data.address,
+        contacts: data.contacts,
       };
       responseArr.push(responseObject);
     });

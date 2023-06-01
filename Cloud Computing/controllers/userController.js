@@ -38,9 +38,23 @@ const getUserId = async (req, res) => {
     if (!userData.exists()) {
       res.status(404).send('User not found');
     } else {
+      const data = userData.data();
       const userWithId = {
         id: userId,
-        ...userData.data(),
+        firstName: data.firstName,
+        lastName: data.lastName,
+        age: data.age,
+        description: data.description,
+        profilePhoto: data.profilePhoto,
+        username: data.username,
+        password: data.password,
+        cv: data.cv,
+        skills: data.skills,
+        address: data.address,
+        phoneNumber: data.phoneNumber,
+        email: data.email,
+        // links could be empty array for later
+        links: data.links,
       };
       res.send(userWithId);
     }
@@ -55,10 +69,23 @@ const getAllUser = async (req, res) => {
     const allUserData = await getDocs(allUserDoc);
     let responseArr = [];
     allUserData.forEach((doc) => {
-      const userData = doc.data();
+      const data = doc.data();
       const responseObject = {
         id: doc.id,
-        ...userData,
+        firstName: data.firstName,
+        lastName: data.lastName,
+        age: data.age,
+        description: data.description,
+        profilePhoto: data.profilePhoto,
+        username: data.username,
+        password: data.password,
+        cv: data.cv,
+        skills: data.skills,
+        address: data.address,
+        phoneNumber: data.phoneNumber,
+        email: data.email,
+        // links could be empty array for later
+        links: data.links,
       };
       responseArr.push(responseObject);
     });
