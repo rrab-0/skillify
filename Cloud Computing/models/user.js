@@ -15,7 +15,6 @@ class User {
     // links could be empty array for later
     links
   ) {
-    this.id = id;
     this.firstName = firstName;
     this.lastName = lastName;
     this.age = age;
