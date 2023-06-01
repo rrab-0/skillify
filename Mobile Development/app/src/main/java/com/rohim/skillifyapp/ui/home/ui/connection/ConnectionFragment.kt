@@ -11,7 +11,7 @@ import com.rohim.skillifyapp.databinding.FragmentNotificationsBinding
 
 class ConnectionFragment : Fragment() {
 
-    private var _binding: FragmentNotificationsBinding? = null
+    private var _binding: FragmentConnectionBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
