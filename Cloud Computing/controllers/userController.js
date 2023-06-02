@@ -10,6 +10,7 @@ const {
   getDoc,
   getDocs,
   collection,
+  deleteDoc,
 } = require('firebase/firestore');
 const actualDb = getFirestore(db);
 // uuid
@@ -95,8 +96,26 @@ const getAllUser = async (req, res) => {
   }
 };
 
+const deleteUser = async (req, res) => {
+  try {
+    const userId = req.params.id;
+    const userDocRef = doc(actualDb, 'users', userId);
+    const userDoc = await getDoc(userDocRef);
+
+    if (!userDoc.exists()) {
+      res.status(404).send('User not found');
+    } else {
+      await deleteDoc(userDocRef);
+      res.send('User deleted successfully');
+    }
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
+};
+
 module.exports = {
   addUser,
   getUserId,
   getAllUser,
+  deleteUser,
 };

@@ -6,15 +6,15 @@
 - make update and delete endpoints for:
   - update:
     - user:
-      - update a user (profile)
+      - [ ] update a user (profile)
     - job:
-      - update a job
+      - [ ] update a job
   - delete:
     - user:
-      - a user
+      - ✅ a user 
     - job:
-      - a job
-      - all job of one user
+      - ✅ a job
+      - [   ] all job of one user
 - update user and job endpoints so a POST response have properties of:
   - user:
     - timestamp

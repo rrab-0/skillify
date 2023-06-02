@@ -11,6 +11,7 @@ const {
   where,
   orderBy,
   getDocs,
+  deleteDoc,
 } = require('firebase/firestore');
 const { doc, setDoc } = require('firebase/firestore');
 const actualDb = getFirestore(db);
@@ -96,8 +97,26 @@ const getAllJobOfOneUser = async (req, res) => {
   }
 };
 
+const deleteJob = async (req, res) => {
+  try {
+    const jobId = req.params.id;
+    const jobDocRef = doc(actualDb, 'jobs', jobId);
+    const jobDoc = await getDoc(jobDocRef);
+
+    if (!jobDoc.exists()) {
+      res.status(404).send('Job not found');
+    } else {
+      await deleteDoc(jobDocRef);
+      res.send('Job deleted successfully');
+    }
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
+};
+
 module.exports = {
   addJob,
   getJobId,
   getAllJobOfOneUser,
+  deleteJob
 };
