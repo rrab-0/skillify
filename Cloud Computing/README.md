@@ -2,6 +2,9 @@
 
 # updated todos:
 
+- problems:
+  - getAllUser response isn't formatted correctly
+  - getAllJobsOfOneUser is broken
 - make documentation
 - add console logs in the endpoints
 - make update and delete endpoints for:
@@ -18,7 +21,7 @@
       - ✅ all job of one user
 - update user and job endpoints so a POST response have properties of:
   - user:
-    - timestamp
+    - ✅ timestamp
     - Contact
       - Phone
       - Email
@@ -29,7 +32,7 @@
     - Photo
       - Links from cloud storage
   - job:
-    - timestamp
+    - ✅ timestamp
     - Contacts
       - Email
       - Phone

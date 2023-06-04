@@ -12,22 +12,33 @@ const {
   orderBy,
   getDocs,
   deleteDoc,
+  serverTimestamp,
 } = require('firebase/firestore');
 const { doc, setDoc } = require('firebase/firestore');
 const actualDb = getFirestore(db);
 // uuid
 const { v4: uuidv4 } = require('uuid');
-// variable generates uuidv4 once
+
+const giveCurrentDateTime = () => {
+  const today = new Date();
+  const date =
+    today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+  const time =
+    today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+  const dateTime = date + ' ' + time;
+  return dateTime;
+};
 
 const addJob = async (req, res) => {
   try {
     const uuid = uuidv4();
+    const currentDateTime = giveCurrentDateTime();
     const data = req.body;
     const jobDoc = doc(actualDb, 'jobs', uuid);
-    await setDoc(jobDoc, data);
+    await setDoc(jobDoc, { data, createdAt: currentDateTime });
 
     res.redirect(`/job/get-job-id/${uuid}`);
-    console.log(`${uuid} record saved`);
+    console.log(`${currentDateTime} with id: ${uuid} record saved`);
   } catch (error) {
     res.status(400).send(error.message);
   }
@@ -45,13 +56,14 @@ const getJobId = async (req, res) => {
       const data = jobData.data();
       const jobWithId = {
         id: jobId,
-        userId: data.userId,
-        jobTitle: data.jobTitle,
-        description: data.description,
-        qualifications: data.qualifications,
-        companyName: data.companyName,
-        address: data.address,
-        contacts: data.contacts,
+        createdAt: data.createdAt,
+        userId: data.data.userId,
+        jobTitle: data.data.jobTitle,
+        description: data.data.description,
+        qualifications: data.data.qualifications,
+        companyName: data.data.companyName,
+        address: data.data.address,
+        contacts: data.data.contacts,
       };
       res.send(jobWithId);
     }
@@ -75,15 +87,19 @@ const getAllJobOfOneUser = async (req, res) => {
       const data = doc.data();
       const responseObject = {
         id: doc.id,
-        userId: data.userId,
-        jobTitle: data.jobTitle,
-        description: data.description,
-        qualifications: data.qualifications,
-        companyName: data.companyName,
-        address: data.address,
-        contacts: data.contacts,
+        createdAt: data.createdAt,
+        data: {
+          ...data.data,
+        },
+        // userId: data.data.userId,
+        // jobTitle: data.data.jobTitle,
+        // description: data.data.description,
+        // qualifications: data.data.qualifications,
+        // companyName: data.data.companyName,
+        // address: data.data.address,
+        // contacts: data.data.contacts,
       };
-      responseArr.push(responseObject);
+      responseArr.push(data);
     });
     if (responseArr.length === 0) {
       res.status(404).send('User have no jobs posted');
