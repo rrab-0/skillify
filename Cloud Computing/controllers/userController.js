@@ -55,20 +55,22 @@ const getUserId = async (req, res) => {
       const userWithId = {
         id: userId,
         createdAt: data.createdAt,
-        firstName: data.data.firstName,
-        lastName: data.data.lastName,
-        age: data.data.age,
-        description: data.data.description,
-        profilePhoto: data.data.profilePhoto,
-        username: data.data.username,
-        password: data.data.password,
-        cv: data.data.cv,
-        skills: data.data.skills,
-        address: data.data.address,
-        phoneNumber: data.data.phoneNumber,
-        email: data.data.email,
-        // links could be empty array for later
-        links: data.data.links,
+        userData: {
+          firstName: data.data.firstName,
+          lastName: data.data.lastName,
+          age: data.data.age,
+          description: data.data.description,
+          profilePhoto: data.data.profilePhoto,
+          username: data.data.username,
+          password: data.data.password,
+          cv: data.data.cv,
+          skills: data.data.skills,
+          address: data.data.address,
+          phoneNumber: data.data.phoneNumber,
+          email: data.data.email,
+          // links could be empty array for later
+          links: data.data.links,
+        },
       };
       res.send(userWithId);
     }
@@ -88,23 +90,22 @@ const getAllUser = async (req, res) => {
       const responseObject = {
         id: doc.id,
         createdAt: data.createdAt,
-        data: {
-          ...data.data,
+        userData: {
+          firstName: data.data.firstName,
+          lastName: data.data.lastName,
+          age: data.data.age,
+          description: data.data.description,
+          profilePhoto: data.data.profilePhoto,
+          username: data.data.username,
+          password: data.data.password,
+          cv: data.data.cv,
+          skills: data.data.skills,
+          address: data.data.address,
+          phoneNumber: data.data.phoneNumber,
+          email: data.data.email,
+          // links could be empty array for later
+          links: data.data.links,
         },
-        // firstName: data.firstName,
-        // lastName: data.lastName,
-        // age: data.age,
-        // description: data.description,
-        // profilePhoto: data.profilePhoto,
-        // username: data.username,
-        // password: data.password,
-        // cv: data.cv,
-        // skills: data.skills,
-        // address: data.address,
-        // phoneNumber: data.phoneNumber,
-        // email: data.email,
-        // // links could be empty array for later
-        // links: data.links,
       };
       responseArr.push(responseObject);
     });

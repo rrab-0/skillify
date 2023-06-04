@@ -57,13 +57,15 @@ const getJobId = async (req, res) => {
       const jobWithId = {
         id: jobId,
         createdAt: data.createdAt,
-        userId: data.data.userId,
-        jobTitle: data.data.jobTitle,
-        description: data.data.description,
-        qualifications: data.data.qualifications,
-        companyName: data.data.companyName,
-        address: data.data.address,
-        contacts: data.data.contacts,
+        jobData: {
+          userId: data.data.userId,
+          jobTitle: data.data.jobTitle,
+          description: data.data.description,
+          qualifications: data.data.qualifications,
+          companyName: data.data.companyName,
+          address: data.data.address,
+          contacts: data.data.contacts,
+        },
       };
       res.send(jobWithId);
     }
@@ -88,19 +90,19 @@ const getAllJobOfOneUser = async (req, res) => {
       const responseObject = {
         id: doc.id,
         createdAt: data.createdAt,
-        data: {
-          ...data.data,
-        },
-        // userId: data.data.userId,
-        // jobTitle: data.data.jobTitle,
-        // description: data.data.description,
-        // qualifications: data.data.qualifications,
-        // companyName: data.data.companyName,
-        // address: data.data.address,
-        // contacts: data.data.contacts,
+        // jobData: {
+        //   userId: data.data.userId,
+        //   jobTitle: data.data.jobTitle,
+        //   description: data.data.description,
+        //   qualifications: data.data.qualifications,
+        //   companyName: data.data.companyName,
+        //   address: data.data.address,
+        //   contacts: data.data.contacts,
+        // },
       };
-      responseArr.push(data);
+      responseArr.push(responseObject);
     });
+
     if (responseArr.length === 0) {
       res.status(404).send('User have no jobs posted');
     } else {

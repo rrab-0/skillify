@@ -3,7 +3,7 @@
 # updated todos:
 
 - problems:
-  - getAllUser response isn't formatted correctly
+  - ✅ getAllUser response isn't formatted correctly
   - getAllJobsOfOneUser is broken
 - make documentation
 - add console logs in the endpoints
