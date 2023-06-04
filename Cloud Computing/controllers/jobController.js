@@ -62,7 +62,6 @@ const getJobId = async (req, res) => {
 
 const getAllJobOfOneUser = async (req, res) => {
   try {
-    // const userIdOfJob = req.params.userId;
     const { userId } = req.query;
     const allJobCollection = collection(actualDb, 'jobs');
     const allJobOfOneUserQuery = query(
@@ -86,12 +85,11 @@ const getAllJobOfOneUser = async (req, res) => {
       };
       responseArr.push(responseObject);
     });
-    res.send(responseArr);
-    // if (!allJobOfOneUserSnapshot.exists()) {
-    //   res.status(404).send('No jobs found');
-    // } else {
-    //   res.send(...allJobOfOneUserSnapshot.data());
-    // }
+    if (responseArr.length === 0) {
+      res.status(404).send('User have no jobs posted');
+    } else {
+      res.send(responseArr);
+    }
   } catch (error) {
     res.status(400).send(error.message);
   }
@@ -114,9 +112,29 @@ const deleteJob = async (req, res) => {
   }
 };
 
+const deleteAllJobOfOneUser = async (req, res) => {
+  try {
+    const { userId } = req.query;
+    const allJobCollection = collection(actualDb, 'jobs');
+    const allJobOfOneUserQuery = query(
+      allJobCollection,
+      where('userId', '==', `${userId}`)
+    );
+    const allJobOfOneUserSnapshot = await getDocs(allJobOfOneUserQuery);
+
+    allJobOfOneUserSnapshot.forEach(async (doc) => {
+      await deleteDoc(doc.ref);
+    });
+    res.send('Jobs deleted successfully');
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
+};
+
 module.exports = {
   addJob,
   getJobId,
   getAllJobOfOneUser,
-  deleteJob
+  deleteJob,
+  deleteAllJobOfOneUser,
 };

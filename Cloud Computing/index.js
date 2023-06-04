@@ -9,6 +9,11 @@ const uploadRoutes = require('./routes/uploadRoutes');
 const app = express();
 
 app.use(express.json());
+
+// const corsOptions = {
+//   origin: '',
+// }
+
 app.use(cors());
 
 app.use('/user', userRoutes.routes);
