@@ -110,7 +110,7 @@ const addUserData = async (req, res) => {
     const userDoc = doc(actualDb, 'users', userId);
     await setDoc(userDoc, { data, id: userId });
 
-    res.redirect(`/user/get-user-id/${userId}`);
+    res.redirect(`/user/get-user-data-by-id/${userId}`);
     console.log(`userData record saved with id: ${userId}`);
   } catch (error) {
     res.status(400).send(error.message);
@@ -183,6 +183,24 @@ const getAllUsersData = async (req, res) => {
   }
 };
 
+const updateUser = async (req, res) => {
+  try {
+    const userId = req.params.id;
+    const data = req.body;
+    const userDocRef = doc(actualDb, 'users', userId);
+    const userDoc = await getDoc(userDocRef);
+
+    if (!userDoc.exists()) {
+      res.status(404).send('User not found');
+    } else {
+      await setDoc(userDocRef, data, { merge: true });
+      res.send('User updated successfully');
+    }
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
+};
+
 const deleteUser = async (req, res) => {
   try {
     const userId = req.params.id;
@@ -207,4 +225,5 @@ module.exports = {
   deleteUser,
   registerUser,
   loginUser,
+  updateUser,
 };
