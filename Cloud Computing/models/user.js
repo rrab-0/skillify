@@ -12,7 +12,6 @@ class User {
     address,
     phoneNumber,
     email,
-    // links could be empty array for later
     links
   ) {
     this.firstName = firstName;
