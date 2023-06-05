@@ -4,7 +4,7 @@
 
 - problems:
   - ✅ getAllUser response isn't formatted correctly
-  - getAllJobsOfOneUser is broken
+  - ✅ getAllJobsOfOneUser is broken
 - make documentation
 - add console logs in the endpoints
 - make update and delete endpoints for:

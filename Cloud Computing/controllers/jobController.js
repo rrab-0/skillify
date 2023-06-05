@@ -35,6 +35,7 @@ const addJob = async (req, res) => {
     const currentDateTime = giveCurrentDateTime();
     const data = req.body;
     const jobDoc = doc(actualDb, 'jobs', uuid);
+    // await setDoc(jobDoc, { data, createdAt: currentDateTime });
     await setDoc(jobDoc, { data, createdAt: currentDateTime });
 
     res.redirect(`/job/get-job-id/${uuid}`);
@@ -55,17 +56,15 @@ const getJobId = async (req, res) => {
     } else {
       const data = jobData.data();
       const jobWithId = {
-        id: jobId,
+        userId: data.data.userId,
         createdAt: data.createdAt,
-        jobData: {
-          userId: data.data.userId,
-          jobTitle: data.data.jobTitle,
-          description: data.data.description,
-          qualifications: data.data.qualifications,
-          companyName: data.data.companyName,
-          address: data.data.address,
-          contacts: data.data.contacts,
-        },
+        id: jobId,
+        jobTitle: data.data.jobTitle,
+        description: data.data.description,
+        qualifications: data.data.qualifications,
+        companyName: data.data.companyName,
+        address: data.data.address,
+        contacts: data.data.contacts,
       };
       res.send(jobWithId);
     }
@@ -80,7 +79,7 @@ const getAllJobOfOneUser = async (req, res) => {
     const allJobCollection = collection(actualDb, 'jobs');
     const allJobOfOneUserQuery = query(
       allJobCollection,
-      where('userId', '==', `${userId}`)
+      where('data.userId', '==', userId)
     );
     const allJobOfOneUserSnapshot = await getDocs(allJobOfOneUserQuery);
 
@@ -88,26 +87,25 @@ const getAllJobOfOneUser = async (req, res) => {
     allJobOfOneUserSnapshot.forEach((doc) => {
       const data = doc.data();
       const responseObject = {
-        id: doc.id,
+        userId: data.data.userId,
         createdAt: data.createdAt,
-        // jobData: {
-        //   userId: data.data.userId,
-        //   jobTitle: data.data.jobTitle,
-        //   description: data.data.description,
-        //   qualifications: data.data.qualifications,
-        //   companyName: data.data.companyName,
-        //   address: data.data.address,
-        //   contacts: data.data.contacts,
-        // },
+        id: doc.id,
+        jobTitle: data.data.jobTitle,
+        description: data.data.description,
+        qualifications: data.data.qualifications,
+        companyName: data.data.companyName,
+        address: data.data.address,
+        contacts: data.data.contacts,
       };
       responseArr.push(responseObject);
     });
 
-    if (responseArr.length === 0) {
-      res.status(404).send('User have no jobs posted');
-    } else {
-      res.send(responseArr);
-    }
+    // if (responseArr.length === 0) {
+    //   res.status(404).send('User have no jobs posted');
+    // } else {
+    //   res.send(responseArr);
+    // }
+    res.send(responseArr);
   } catch (error) {
     res.status(400).send(error.message);
   }
@@ -136,7 +134,7 @@ const deleteAllJobOfOneUser = async (req, res) => {
     const allJobCollection = collection(actualDb, 'jobs');
     const allJobOfOneUserQuery = query(
       allJobCollection,
-      where('userId', '==', `${userId}`)
+      where('data.userId', '==', `${userId}`)
     );
     const allJobOfOneUserSnapshot = await getDocs(allJobOfOneUserQuery);
 

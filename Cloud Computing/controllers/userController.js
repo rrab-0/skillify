@@ -13,7 +13,6 @@ const {
   getDocs,
   collection,
   deleteDoc,
-  serverTimestamp,
   query,
   where,
 } = require('firebase/firestore');
@@ -31,116 +30,11 @@ const giveCurrentDateTime = () => {
   return dateTime;
 };
 
-const addUser = async (req, res) => {
-  try {
-    const uuid = uuidv4();
-    const currentDateTime = giveCurrentDateTime();
-    const data = req.body;
-    const userDoc = doc(actualDb, 'users', uuid);
-    await setDoc(userDoc, { data, createdAt: currentDateTime });
-
-    res.redirect(`/user/get-user-id/${uuid}`);
-    console.log(`${currentDateTime} with id: ${uuid} record saved`);
-  } catch (error) {
-    res.status(400).send(error.message);
-  }
-};
-
-const getUserId = async (req, res) => {
-  try {
-    const userId = req.params.id;
-    const userIdDocRef = doc(actualDb, 'users', userId);
-    const userData = await getDoc(userIdDocRef);
-
-    if (!userData.exists()) {
-      res.status(404).send('User not found');
-    } else {
-      const data = userData.data();
-      const userWithId = {
-        id: userId,
-        createdAt: data.createdAt,
-        userData: {
-          firstName: data.data.firstName,
-          lastName: data.data.lastName,
-          age: data.data.age,
-          description: data.data.description,
-          profilePhoto: data.data.profilePhoto,
-          username: data.data.username,
-          password: data.data.password,
-          cv: data.data.cv,
-          skills: data.data.skills,
-          address: data.data.address,
-          phoneNumber: data.data.phoneNumber,
-          email: data.data.email,
-          // links could be empty array for later
-          links: data.data.links,
-        },
-      };
-      res.send(userWithId);
-    }
-  } catch (error) {
-    res.status(400).send(error.message);
-  }
-};
-
-const getAllUser = async (req, res) => {
-  try {
-    const allUserDoc = collection(actualDb, 'users');
-    const allUserData = await getDocs(allUserDoc);
-
-    let responseArr = [];
-    allUserData.forEach((doc) => {
-      const data = doc.data();
-      const responseObject = {
-        id: doc.id,
-        createdAt: data.createdAt,
-        userData: {
-          firstName: data.data.firstName,
-          lastName: data.data.lastName,
-          age: data.data.age,
-          description: data.data.description,
-          profilePhoto: data.data.profilePhoto,
-          username: data.data.username,
-          password: data.data.password,
-          cv: data.data.cv,
-          skills: data.data.skills,
-          address: data.data.address,
-          phoneNumber: data.data.phoneNumber,
-          email: data.data.email,
-          // links could be empty array for later
-          links: data.data.links,
-        },
-      };
-      responseArr.push(responseObject);
-    });
-    res.send(responseArr);
-  } catch (error) {
-    res.status(400).send(error.message);
-  }
-};
-
-const deleteUser = async (req, res) => {
-  try {
-    const userId = req.params.id;
-    const userDocRef = doc(actualDb, 'users', userId);
-    const userDoc = await getDoc(userDocRef);
-
-    if (!userDoc.exists()) {
-      res.status(404).send('User not found');
-    } else {
-      await deleteDoc(userDocRef);
-      res.send('User deleted successfully');
-    }
-  } catch (error) {
-    res.status(400).send(error.message);
-  }
-};
-
 const registerUser = async (req, res) => {
   try {
     const { username, password } = req.body;
     const usernameQuery = query(
-      collection(actualDb, 'users'),
+      collection(actualDb, 'registeredUsers'),
       where('username', '==', username)
     );
     const usernameSnapshot = await getDocs(usernameQuery);
@@ -149,13 +43,14 @@ const registerUser = async (req, res) => {
     }
     const hashedPassword = await bcrypt.hash(password, 10);
     const uuid = uuidv4();
-    const userDocRef = doc(actualDb, 'users', uuid);
+    const userDocRef = doc(actualDb, 'registeredUsers', uuid);
     await setDoc(userDocRef, {
+      createdAt: giveCurrentDateTime(),
       username: username,
       password: hashedPassword,
     });
     const token = jwt.sign({ uuid }, 'secret_key', { expiresIn: '1h' });
-    res.status(200).json({ token });
+    res.status(200).json({ uuid, token });
   } catch (error) {
     res.status(500).json({ error: 'Failed to register user' });
   }
@@ -164,7 +59,7 @@ const registerUser = async (req, res) => {
 const loginUser = async (req, res) => {
   try {
     const { username, password } = req.body;
-    const usersCollection = collection(actualDb, 'users');
+    const usersCollection = collection(actualDb, 'registeredUsers');
     console.log(usersCollection);
     const querySnapshot = await getDocs(
       query(usersCollection, where('username', '==', username))
@@ -208,10 +103,107 @@ const authenticateToken = (req, res, next) => {
   });
 };
 
+const addUserData = async (req, res) => {
+  try {
+    const userId = req.params.id;
+    const data = req.body;
+    const userDoc = doc(actualDb, 'users', userId);
+    await setDoc(userDoc, { data, id: userId });
+
+    res.redirect(`/user/get-user-id/${userId}`);
+    console.log(`userData record saved with id: ${userId}`);
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
+};
+
+const getUserDataById = async (req, res) => {
+  try {
+    const userId = req.params.id;
+    const userIdDocRef = doc(actualDb, 'users', userId);
+    const userData = await getDoc(userIdDocRef);
+
+    if (!userData.exists()) {
+      res.status(404).send('User datas not found');
+    } else {
+      const data = userData.data();
+      const userWithId = {
+        id: userId,
+        firstName: data.data.firstName,
+        lastName: data.data.lastName,
+        age: data.data.age,
+        description: data.data.description,
+        profilePhoto: data.data.profilePhoto,
+        cv: data.data.cv,
+        skills: data.data.skills,
+        address: data.data.address,
+        phoneNumber: data.data.phoneNumber,
+        email: data.data.email,
+        // links could be empty array for later
+        links: data.data.links,
+      };
+      res.send(userWithId);
+    }
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
+};
+
+const getAllUsersData = async (req, res) => {
+  try {
+    const allUserDoc = collection(actualDb, 'users');
+    const allUserData = await getDocs(allUserDoc);
+
+    let responseArr = [];
+    allUserData.forEach((doc) => {
+      const data = doc.data();
+      const responseObject = {
+        id: doc.id,
+        createdAt: data.createdAt,
+        username: data.username,
+        password: data.password,
+        firstName: data.data.firstName,
+        lastName: data.data.lastName,
+        age: data.data.age,
+        description: data.data.description,
+        profilePhoto: data.data.profilePhoto,
+        cv: data.data.cv,
+        skills: data.data.skills,
+        address: data.data.address,
+        phoneNumber: data.data.phoneNumber,
+        email: data.data.email,
+        // links could be empty array for later
+        links: data.data.links,
+      };
+      responseArr.push(responseObject);
+    });
+    res.send(responseArr);
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
+};
+
+const deleteUser = async (req, res) => {
+  try {
+    const userId = req.params.id;
+    const userDocRef = doc(actualDb, 'users', userId);
+    const userDoc = await getDoc(userDocRef);
+
+    if (!userDoc.exists()) {
+      res.status(404).send('User not found');
+    } else {
+      await deleteDoc(userDocRef);
+      res.send('User deleted successfully');
+    }
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
+};
+
 module.exports = {
-  addUser,
-  getUserId,
-  getAllUser,
+  addUserData,
+  getUserDataById,
+  getAllUsersData,
   deleteUser,
   registerUser,
   loginUser,
