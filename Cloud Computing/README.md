@@ -2,12 +2,36 @@
 
 # updated todos:
 
+- integrate with cloud storage so our endpoints can store links, photos, etc
+- validate requests first before able to hit endpoint (https://simonplend.com/how-to-handle-request-validation-in-your-express-api/)
+- add console logs in the endpoints
+- implement auth (jwt)
+- make documentation
+- update user and job endpoints so a POST response have properties of:
+  - user:
+    - ✅ timestamp
+    - ✅ profilePhoto
+      - link from cloud storage
+    - Contact
+      - Phone
+      - Email
+      - Links
+        - Linkedin
+        - Github
+        - etc
+  - job:
+    - ✅ timestamp
+    - Contacts
+      - Email
+      - Phone
+      - HR Contact
+
+# done
+
 - problems:
   - ✅ getAllUser response isn't formatted correctly
   - ✅ getAllJobsOfOneUser is broken
-  - because registeredUser and userData is seperated we need to also delete registeredUser in db when deleting userData
-- implement auth (jwt)
-- make documentation
+  - ✅ because registeredUser and userData is seperated we need to also delete registeredUser in db when deleting userData
 - make update and delete endpoints for:
   - update:
     - user:
@@ -20,27 +44,6 @@
     - job:
       - ✅ a job
       - ✅ all job of one user
-- update user and job endpoints so a POST response have properties of:
-  - user:
-    - ✅ timestamp
-    - Contact
-      - Phone
-      - Email
-      - Links
-        - Linkedin
-        - Github
-        - etc
-    - Photo
-      - Links from cloud storage
-  - job:
-    - ✅ timestamp
-    - Contacts
-      - Email
-      - Phone
-      - HR Contact
-- integrate with cloud storage so our endpoints can store links, photos, etc
-- validate requests first before able to hit endpoint (https://simonplend.com/how-to-handle-request-validation-in-your-express-api/)
-- add console logs in the endpoints
 
 # TODOS:
 
