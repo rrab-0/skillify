@@ -206,11 +206,14 @@ const deleteUser = async (req, res) => {
     const userId = req.params.id;
     const userDocRef = doc(actualDb, 'users', userId);
     const userDoc = await getDoc(userDocRef);
+    const registeredUserDocRef = doc(actualDb, 'registeredUsers', userId);
+    const registeredUserDoc = await getDoc(registeredUserDocRef);
 
-    if (!userDoc.exists()) {
+    if (!userDoc.exists() || !registeredUserDoc.exists()) {
       res.status(404).send('User not found');
     } else {
       await deleteDoc(userDocRef);
+      await deleteDoc(registeredUserDocRef);
       res.send('User deleted successfully');
     }
   } catch (error) {
