@@ -165,8 +165,10 @@ const loginUser = async (req, res) => {
   try {
     const { username, password } = req.body;
     const usersCollection = collection(actualDb, 'users');
-    console.log(usersCollection)
-    const querySnapshot = await getDocs(query(usersCollection, where('username', '==', username)));
+    console.log(usersCollection);
+    const querySnapshot = await getDocs(
+      query(usersCollection, where('username', '==', username))
+    );
     if (querySnapshot.empty) {
       res.status(404).json({ message: 'User not found' });
       return;
@@ -177,7 +179,9 @@ const loginUser = async (req, res) => {
     const passwordMatch = await bcrypt.compare(password, hashedPassword);
 
     if (passwordMatch) {
-      const token = jwt.sign({ userId: userDoc.id }, 'secret_key', { expiresIn: '1h' });
+      const token = jwt.sign({ userId: userDoc.id }, 'secret_key', {
+        expiresIn: '1h',
+      });
       res.status(200).json({ token });
     } else {
       res.status(401).json({ message: 'Invalid credentials' });
