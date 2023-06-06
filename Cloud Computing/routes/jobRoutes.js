@@ -9,11 +9,15 @@ const {
   deleteAllJobOfOneUser,
 } = require('../controllers/jobController');
 
-router.post('/add-job', addJob);
-router.get('/get-job-id/:id', getJobId);
-router.get('/get-all-jobs-for-a-user', getAllJobOfOneUser);
-router.delete('/delete-job/:id', deleteJob);
-router.delete('/delete-all-jobs-for-a-user', deleteAllJobOfOneUser);
+const {
+  authenticateToken,
+} = require('../controllers/userController');
+
+router.post('/add-job', authenticateToken, addJob);
+router.get('/get-job-id/:id', authenticateToken, getJobId);
+router.get('/get-all-jobs-for-a-user', authenticateToken, getAllJobOfOneUser);
+router.delete('/delete-job/:id', authenticateToken, deleteJob);
+router.delete('/delete-all-jobs-for-a-user', authenticateToken, deleteAllJobOfOneUser);
 
 module.exports = {
   routes: router,
