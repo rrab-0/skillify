@@ -2,26 +2,16 @@
 
 # updated todos:
 
-- problems:
-  - ✅ getAllUser response isn't formatted correctly
-  - ✅ getAllJobsOfOneUser is broken
-- make documentation
+- integrate with cloud storage so our endpoints can store links, photos, etc
+- validate requests first before able to hit endpoint (https://simonplend.com/how-to-handle-request-validation-in-your-express-api/)
 - add console logs in the endpoints
-- make update and delete endpoints for:
-  - update:
-    - user:
-      - [ ] update a user (profile)
-    - job:
-      - [ ] update a job
-  - delete:
-    - user:
-      - ✅ a user
-    - job:
-      - ✅ a job
-      - ✅ all job of one user
+- implement auth (jwt)
+- make documentation
 - update user and job endpoints so a POST response have properties of:
   - user:
     - ✅ timestamp
+    - ✅ profilePhoto
+      - link from cloud storage
     - Contact
       - Phone
       - Email
@@ -29,17 +19,31 @@
         - Linkedin
         - Github
         - etc
-    - Photo
-      - Links from cloud storage
   - job:
     - ✅ timestamp
     - Contacts
       - Email
       - Phone
       - HR Contact
-- integrate with cloud storage so our endpoints can store links, photos, etc
-- validate requests first before able to hit endpoint (https://simonplend.com/how-to-handle-request-validation-in-your-express-api/)
-- implement auth (jwt)
+
+# done
+
+- problems:
+  - ✅ getAllUser response isn't formatted correctly
+  - ✅ getAllJobsOfOneUser is broken
+  - ✅ because registeredUser and userData is seperated we need to also delete registeredUser in db when deleting userData
+- make update and delete endpoints for:
+  - update:
+    - user:
+      - ✅ update a user (profile)
+    - job:
+      - ✅ update a job
+  - delete:
+    - user:
+      - ✅ a user
+    - job:
+      - ✅ a job
+      - ✅ all job of one user
 
 # TODOS:
 

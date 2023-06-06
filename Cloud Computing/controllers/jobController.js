@@ -35,8 +35,7 @@ const addJob = async (req, res) => {
     const currentDateTime = giveCurrentDateTime();
     const data = req.body;
     const jobDoc = doc(actualDb, 'jobs', uuid);
-    // await setDoc(jobDoc, { data, createdAt: currentDateTime });
-    await setDoc(jobDoc, { data, createdAt: currentDateTime });
+    await setDoc(jobDoc, { ...data, createdAt: currentDateTime });
 
     res.redirect(`/job/get-job-id/${uuid}`);
     console.log(`${currentDateTime} with id: ${uuid} record saved`);
@@ -56,15 +55,15 @@ const getJobId = async (req, res) => {
     } else {
       const data = jobData.data();
       const jobWithId = {
-        userId: data.data.userId,
+        userId: data.userId,
         createdAt: data.createdAt,
         id: jobId,
-        jobTitle: data.data.jobTitle,
-        description: data.data.description,
-        qualifications: data.data.qualifications,
-        companyName: data.data.companyName,
-        address: data.data.address,
-        contacts: data.data.contacts,
+        jobTitle: data.jobTitle,
+        description: data.description,
+        qualifications: data.qualifications,
+        companyName: data.companyName,
+        address: data.address,
+        contacts: data.contacts,
       };
       res.send(jobWithId);
     }
@@ -79,7 +78,7 @@ const getAllJobOfOneUser = async (req, res) => {
     const allJobCollection = collection(actualDb, 'jobs');
     const allJobOfOneUserQuery = query(
       allJobCollection,
-      where('data.userId', '==', userId)
+      where('userId', '==', userId)
     );
     const allJobOfOneUserSnapshot = await getDocs(allJobOfOneUserQuery);
 
@@ -87,15 +86,15 @@ const getAllJobOfOneUser = async (req, res) => {
     allJobOfOneUserSnapshot.forEach((doc) => {
       const data = doc.data();
       const responseObject = {
-        userId: data.data.userId,
+        userId: data.userId,
         createdAt: data.createdAt,
         id: doc.id,
-        jobTitle: data.data.jobTitle,
-        description: data.data.description,
-        qualifications: data.data.qualifications,
-        companyName: data.data.companyName,
-        address: data.data.address,
-        contacts: data.data.contacts,
+        jobTitle: data.jobTitle,
+        description: data.description,
+        qualifications: data.qualifications,
+        companyName: data.companyName,
+        address: data.address,
+        contacts: data.contacts,
       };
       responseArr.push(responseObject);
     });
@@ -106,6 +105,24 @@ const getAllJobOfOneUser = async (req, res) => {
     //   res.send(responseArr);
     // }
     res.send(responseArr);
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
+};
+
+const updateJob = async (req, res) => {
+  try {
+    const jobId = req.params.id;
+    const data = req.body;
+    const jobDocRef = doc(actualDb, 'jobs', jobId);
+    const jobDoc = await getDoc(jobDocRef);
+
+    if (!jobDoc.exists()) {
+      res.status(404).send('Job not found');
+    } else {
+      await setDoc(jobDocRef, data, { merge: true });
+      res.send('Job updated successfully');
+    }
   } catch (error) {
     res.status(400).send(error.message);
   }
@@ -134,7 +151,7 @@ const deleteAllJobOfOneUser = async (req, res) => {
     const allJobCollection = collection(actualDb, 'jobs');
     const allJobOfOneUserQuery = query(
       allJobCollection,
-      where('data.userId', '==', `${userId}`)
+      where('userId', '==', `${userId}`)
     );
     const allJobOfOneUserSnapshot = await getDocs(allJobOfOneUserQuery);
 
@@ -151,6 +168,7 @@ module.exports = {
   addJob,
   getJobId,
   getAllJobOfOneUser,
+  updateJob,
   deleteJob,
   deleteAllJobOfOneUser,
 };

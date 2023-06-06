@@ -108,7 +108,7 @@ const addUserData = async (req, res) => {
     const userId = req.params.id;
     const data = req.body;
     const userDoc = doc(actualDb, 'users', userId);
-    await setDoc(userDoc, { data, id: userId });
+    await setDoc(userDoc, { ...data, id: userId });
 
     res.redirect(`/user/get-user-data-by-id/${userId}`);
     console.log(`userData record saved with id: ${userId}`);
@@ -129,18 +129,18 @@ const getUserDataById = async (req, res) => {
       const data = userData.data();
       const userWithId = {
         id: userId,
-        firstName: data.data.firstName,
-        lastName: data.data.lastName,
-        age: data.data.age,
-        description: data.data.description,
-        profilePhoto: data.data.profilePhoto,
-        cv: data.data.cv,
-        skills: data.data.skills,
-        address: data.data.address,
-        phoneNumber: data.data.phoneNumber,
-        email: data.data.email,
+        firstName: data.firstName,
+        lastName: data.lastName,
+        age: data.age,
+        description: data.description,
+        profilePhoto: data.profilePhoto,
+        cv: data.cv,
+        skills: data.skills,
+        address: data.address,
+        phoneNumber: data.phoneNumber,
+        email: data.email,
         // links could be empty array for later
-        links: data.data.links,
+        links: data.links,
       };
       res.send(userWithId);
     }
@@ -162,18 +162,18 @@ const getAllUsersData = async (req, res) => {
         createdAt: data.createdAt,
         username: data.username,
         password: data.password,
-        firstName: data.data.firstName,
-        lastName: data.data.lastName,
-        age: data.data.age,
-        description: data.data.description,
-        profilePhoto: data.data.profilePhoto,
-        cv: data.data.cv,
-        skills: data.data.skills,
-        address: data.data.address,
-        phoneNumber: data.data.phoneNumber,
-        email: data.data.email,
+        firstName: data.firstName,
+        lastName: data.lastName,
+        age: data.age,
+        description: data.description,
+        profilePhoto: data.profilePhoto,
+        cv: data.cv,
+        skills: data.skills,
+        address: data.address,
+        phoneNumber: data.phoneNumber,
+        email: data.email,
         // links could be empty array for later
-        links: data.data.links,
+        links: data.links,
       };
       responseArr.push(responseObject);
     });
@@ -206,11 +206,14 @@ const deleteUser = async (req, res) => {
     const userId = req.params.id;
     const userDocRef = doc(actualDb, 'users', userId);
     const userDoc = await getDoc(userDocRef);
+    const registeredUserDocRef = doc(actualDb, 'registeredUsers', userId);
+    const registeredUserDoc = await getDoc(registeredUserDocRef);
 
-    if (!userDoc.exists()) {
+    if (!userDoc.exists() || !registeredUserDoc.exists()) {
       res.status(404).send('User not found');
     } else {
       await deleteDoc(userDocRef);
+      await deleteDoc(registeredUserDocRef);
       res.send('User deleted successfully');
     }
   } catch (error) {
