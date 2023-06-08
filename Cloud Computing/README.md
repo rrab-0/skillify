@@ -2,8 +2,13 @@
 
 # updated todos:
 
-- make documentation
-- deploy backend
+- make API documentation
+- make deployment documentation
+  - firebase
+  - cloud run
+    - ml
+    - backend
+- ✅ deploy backend
 - optional - validate requests first before able to hit endpoint (https://simonplend.com/how-to-handle-request-validation-in-your-express-api/)
 
 # done
