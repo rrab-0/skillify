@@ -229,4 +229,5 @@ module.exports = {
   registerUser,
   loginUser,
   updateUser,
+  authenticateToken,
 };
