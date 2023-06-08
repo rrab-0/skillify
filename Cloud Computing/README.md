@@ -12,7 +12,7 @@
     - ✅ timestamp
     - ✅ profilePhoto
       - link from cloud storage
-    - Contact
+    - ✅ Contact
       - Phone
       - Email
       - Links
@@ -21,7 +21,7 @@
         - etc
   - job:
     - ✅ timestamp
-    - Contacts
+    - ✅ Contacts
       - Email
       - Phone
       - HR Contact

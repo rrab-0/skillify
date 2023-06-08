@@ -63,7 +63,10 @@ const getJobId = async (req, res) => {
         qualifications: data.qualifications,
         companyName: data.companyName,
         address: data.address,
-        contacts: data.contacts,
+        phoneNumber: data.phoneNumber,
+        email: data.email,
+        website: data.website,
+        linkedIn: data.linkedIn,
       };
       res.send(jobWithId);
     }
@@ -94,7 +97,10 @@ const getAllJobOfOneUser = async (req, res) => {
         qualifications: data.qualifications,
         companyName: data.companyName,
         address: data.address,
-        contacts: data.contacts,
+        phoneNumber: data.phoneNumber,
+        email: data.email,
+        website: data.website,
+        linkedIn: data.linkedIn,
       };
       responseArr.push(responseObject);
     });

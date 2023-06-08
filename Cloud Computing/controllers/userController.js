@@ -139,8 +139,8 @@ const getUserDataById = async (req, res) => {
         address: data.address,
         phoneNumber: data.phoneNumber,
         email: data.email,
-        // links could be empty array for later
-        links: data.links,
+        website: data.website,
+        linkedIn: data.linkedIn,
       };
       res.send(userWithId);
     }
@@ -172,8 +172,8 @@ const getAllUsersData = async (req, res) => {
         address: data.address,
         phoneNumber: data.phoneNumber,
         email: data.email,
-        // links could be empty array for later
-        links: data.links,
+        website: data.website,
+        linkedIn: data.linkedIn,
       };
       responseArr.push(responseObject);
     });
