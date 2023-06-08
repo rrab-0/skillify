@@ -2,11 +2,13 @@
 
 # updated todos:
 
-- integrate with cloud storage so our endpoints can store links, photos, etc
-- validate requests first before able to hit endpoint (https://simonplend.com/how-to-handle-request-validation-in-your-express-api/)
-- add console logs in the endpoints
-- implement auth (jwt)
 - make documentation
+- deploy backend
+- optional - validate requests first before able to hit endpoint (https://simonplend.com/how-to-handle-request-validation-in-your-express-api/)
+
+# done
+
+- ✅ implement auth (jwt)
 - update user and job endpoints so a POST response have properties of:
   - user:
     - ✅ timestamp
@@ -25,9 +27,6 @@
       - Email
       - Phone
       - HR Contact
-
-# done
-
 - problems:
   - ✅ getAllUser response isn't formatted correctly
   - ✅ getAllJobsOfOneUser is broken
