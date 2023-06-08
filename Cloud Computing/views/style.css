@@ -1,0 +1,60 @@
+/* 
+todos: 
+- add colors for request methods
+  - green for POST
+  - blue for GET
+  - yellow for UPDATE
+  - red for DELETE
+*/
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  padding: 3.7em 5em;
+  display: flex;
+  flex-direction: column;
+  gap: 3em;
+}
+
+.title-container,
+.register-flow-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  text-align: justify;
+}
+
+.user-container,
+.job-container {
+  display: flex;
+  flex-direction: column;
+  gap: 3em;
+}
+
+.user-container h2,
+.job-container h2 {
+  width: max-content;
+  padding-bottom: 10px;
+  border-bottom: 1px solid gray;
+}
+
+.title-span {
+  padding-left: 1.2em;
+  font-size: small;
+  font-weight: 400;
+}
+
+.request-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.body-response-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
