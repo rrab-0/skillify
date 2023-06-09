@@ -1,184 +1,363 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>API Documentation</title>
-    <!-- 
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>API Documentation</title>
+  <!-- 
       delete below line if production 
       <link rel="stylesheet" type="text/css" href="./style.css" />
       also don't forget to copy views/style.css to public/style.css
     -->
-    <link rel="stylesheet" type="text/css" href="./style.css" />
-    <link rel="stylesheet" type="text/css" href="/style.css" />
-  </head>
-  <body>
-    <div class="title-container">
-      <h1>Skillify API Documentation</h1>
-      <p>
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quisquam rerum
-        dignissimos atque eaque itaque, possimus accusantium eius asperiores
-        illo illum aliquid minima laborum quidem. Ipsam nisi reiciendis
-        consequuntur dolor quidem.
-      </p>
-    </div>
-    <div class="register-flow-container">
-      <h2>User register flow</h2>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum harum
-        commodi repellendus culpa eos veniam suscipit unde, porro sed repellat
-        natus magnam possimus deleniti dolorem quaerat ad, tempore asperiores
-        corporis!
-      </p>
-    </div>
-    <div class="user-container">
-      <h2>
-        User
-        <span class="title-span"
-          >to perform operations on user data such as adding, listing, updating,
-          and deleting.</span
-        >
-      </h2>
-      <div class="request-container">
+  <link rel="stylesheet" type="text/css" href="./style.css" />
+  <link rel="stylesheet" type="text/css" href="/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+
+</head>
+
+<body>
+  <div class="title-container">
+    <h1>Skillify API Documentation</h1>
+    <p>
+      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quisquam rerum
+      dignissimos atque eaque itaque, possimus accusantium eius asperiores
+      illo illum aliquid minima laborum quidem. Ipsam nisi reiciendis
+      consequuntur dolor quidem.
+    </p>
+  </div>
+
+  <div class="register-flow-container">
+    <h2>User register flow</h2>
+    <p>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum harum
+      commodi repellendus culpa eos veniam suscipit unde, porro sed repellat
+      natus magnam possimus deleniti dolorem quaerat ad, tempore asperiores
+      corporis!
+    </p>
+  </div>
+
+  <div class="user-container">
+    <h2>
+      User
+      <span class="title-span">to perform operations on user data such as adding, listing, updating,
+        and deleting.</span>
+    </h2>
+    <div class="container">
+      <div class="request-column">
         <div class="methods-container">
           <p>POST /user/register</p>
           <p>to register a user.</p>
         </div>
-        <div class="body-response-container">
-          <p>request body here</p>
-          <p>response here</p>
+        <div class="body-container">
+          <h4>Request</h4>
+          <pre><code class="language-json">
+      {
+        "username": "username1",
+        "password": "password"
+      }
+            </code></pre>
         </div>
       </div>
-      <div class="request-container">
+      <div class="response-column">
+        <div class="body-container">
+          <h4>Response</h4>
+          <pre><code class="language-json">
+      {
+        "uuid": "f2a3d0c7-b90a-41f0-b0fb-73c665b4483a",
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiZjJhM2QwYzctYjkwYS00MWYwLWIwZmItNzNjNjY1YjQ0ODNhIiwiaWF0IjoxNjg2MjgwMjM4LCJleHAiOjE2ODYyODM4Mzh9.Zv1Epg9M05inOt8Au-xvDn87cj1KD7CMDUQH6wUczMk"
+      }
+          </code></pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="request-column">
         <div class="methods-container">
           <p>POST /user/login</p>
           <p>to login a user.</p>
         </div>
-        <div class="body-response-container">
-          <p>request body here</p>
-          <p>response here</p>
+        <div class="body-container">
+          <h4>Request</h4>
+          <pre><code class="language-json">
+      {
+        "username": "username1",
+        "password": "password"
+      }
+            </code></pre>
         </div>
       </div>
-      <div class="request-container">
+      <div class="response-column">
+        <div class="body-container">
+          <h4>Response</h4>
+          <pre><code class="language-json">
+      {
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiZjJhM2QwYzctYjkwYS00MWYwLWIwZmItNzNjNjY1YjQ0ODNhIiwiaWF0IjoxNjg2MjgwMjM4LCJleHAiOjE2ODYyODM4Mzh9.Zv1Epg9M05inOt8Au-xvDn87cj1KD7CMDUQH6wUczMk"
+      }
+          </code></pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="request-column">
         <div class="methods-container">
           <p>POST /user/add-user-data/{id}</p>
           <p>to add user datas.</p>
         </div>
-        <div class="body-response-container">
-          <p>request body here</p>
-          <p>response here</p>
+        <div class="body-container">
+          <h4>Request</h4>
+          <pre><code class="language-json">
+      {
+        "firstName": "Andre",
+        "lastName": "Budiman",
+        "age": "20",
+        "description": "Pekerja yang tertarik dengan teknologi",
+        "profilePhoto": "fill with link from google cloud storage",
+        "cv": "fill with link from google cloud storage",
+        "skills": "python",
+        "address": "Jl anggrek",
+        "phoneNumber": "08123445232",
+        "email": "your@mail.com",
+        "website": "andre.co.id",
+        "linkedIn": "linkedin.com/andre"
+      }
+          </code></pre>
         </div>
       </div>
-      <div class="request-container">
+      <div class="response-column">
+        <div class="body-container">
+          <h4>Response</h4>
+          <pre><code class="language-json">
+      {
+        "id": "f2a3d0c7-b90a-41f0-b0fb-73c665b4483a",
+        "firstName": "Andre",
+        "lastName": "Budiman",
+        "age": "20",
+        "description": "Pekerja yang tertarik dengan teknologi",
+        "profilePhoto": "fill with link from google cloud storage",
+        "cv": "fill with link from google cloud storage",
+        "skills": "python",
+        "address": "Jl anggrek",
+        "phoneNumber": "08123445232",
+        "email": "your@mail.com",
+        "website": "andre.co.id",
+        "linkedIn": "linkedin.com/andre"
+      }
+          </code></pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="request-column">
         <div class="methods-container">
           <p>GET /user/get-user-data-by-id/{id}</p>
           <p>to list datas of a user.</p>
         </div>
-        <div class="body-response-container">
-          <p>request body here</p>
-          <p>response here</p>
+      </div>
+      <div class="response-column">
+        <div class="body-container">
+          <h4>Response</h4>
+          <pre><code class="language-json">
+      {
+        "id": "f2a3d0c7-b90a-41f0-b0fb-73c665b4483a",
+        "firstName": "Andre",
+        "lastName": "Budiman",
+        "age": "20",
+        "description": "Pekerja yang tertarik dengan teknologi",
+        "profilePhoto": "fill with link from google cloud storage",
+        "cv": "fill with link from google cloud storage",
+        "skills": "python",
+        "address": "Jl anggrek",
+        "phoneNumber": "08123445232",
+        "email": "your@mail.com",
+        "website": "andre.co.id",
+        "linkedIn": "linkedin.com/andre"
+      }
+        </code></pre>
         </div>
       </div>
-      <div class="request-container">
+    </div>
+
+    <div class="container">
+      <div class="request-column">
         <div class="methods-container">
           <p>GET /user/get-all-user</p>
           <p>to list all users registered.</p>
         </div>
-        <div class="body-response-container">
-          <p>request body here</p>
-          <p>response here</p>
+      </div>
+      <div class="response-column">
+        <div class="body-container">
+          <h4>Response</h4>
+          <pre><code class="language-json">
+      [
+        {
+          "id": "e8175a69-15ff-459d-b847-ce65c236db3f",
+          "firstName": "momooooo",
+          "lastName": "world",
+          "age": "20",
+          "description": "short story",
+          "profilePhoto": "link from cloud storage",
+          "cv": "hello cv",
+          "skills": "basketball",
+          "address": "jump street",
+          "phoneNumber": "08123445",
+          "email": "your@mail.com",
+          "website": "whdwadaw",
+          "linkedIn": "this should be an array of links from cloud storage"
+        },
+        {
+          "id": "ea8fa941-5d02-4d5f-a88f-1c2c2b326e55",
+          "firstName": "momooooo",
+          "lastName": "world",
+          "age": "20",
+          "description": "short story",
+          "profilePhoto": "link from cloud storage",
+          "cv": "cool cv",
+          "skills": "basketball",
+          "address": "jump street",
+          "phoneNumber": "08123445",
+          "email": "your@mail.com"
+        },
+        {
+          "id": "f2a3d0c7-b90a-41f0-b0fb-73c665b4483a",
+          "firstName": "Andre",
+          "lastName": "Budiman",
+          "age": "20",
+          "description": "Pekerja yang tertarik dengan teknologi",
+          "profilePhoto": "fill with link from google cloud storage",
+          "cv": "fill with link from google cloud storage",
+          "skills": "python",
+          "address": "Jl anggrek",
+          "phoneNumber": "08123445232",
+          "email": "your@mail.com",
+          "website": "andre.co.id",
+          "linkedIn": "linkedin.com/andre"
+        }
+      ]
+          </code></pre>
         </div>
       </div>
-      <div class="request-container">
+    </div>
+
+    <div class="container">
+      <div class="request-column">
         <div class="methods-container">
           <p>UPDATE /user/update-user/{id}</p>
           <p>to update user's data.</p>
         </div>
-        <div class="body-response-container">
-          <p>request body here</p>
-          <p>response here</p>
+        <div class="body-container">
+          <h4>Request</h4>
+          <pre><code class="language-json">
+      {
+        "firstName": "Andreas"
+      }
+          </code></pre>
         </div>
       </div>
-      <div class="request-container">
+      <div class="response-column">
+        <div class="body-container">
+          <h4>Response</h4>
+          <pre><code class="language-json">
+      User updated successfully
+            </code></pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="request-column">
         <div class="methods-container">
           <p>DELETE /user/delete-user/{id}</p>
           <p>to delete user's data.</p>
         </div>
-        <div class="body-response-container">
-          <p>request body here</p>
-          <p>response here</p>
+      </div>
+      <div class="response-column">
+        <div class="body-container">
+          <h4>Response</h4>
+          <pre><code class="language-json">
+      User deleted successfully
+            </code></pre>
         </div>
       </div>
     </div>
-    <div class="job-container">
-      <h2>
-        Job
-        <span class="title-span"
-          >to perform operations on jobs a user posted such as adding, listing,
-          updating, and deleting.</span
-        >
-      </h2>
-      <div class="request-container">
-        <div class="methods-container">
-          <p>POST /job/add-job</p>
-          <p>to add jobs for a user.</p>
-        </div>
-        <div class="body-response-container">
-          <p>request body here</p>
-          <p>response here</p>
-        </div>
+  
+  <div class="job-container">
+    <h2>
+      Job
+      <span class="title-span">to perform operations on jobs a user posted such as adding, listing,
+        updating, and deleting.</span>
+    </h2>
+    <div class="request-container">
+      <div class="methods-container">
+        <p>POST /job/add-job</p>
+        <p>to add jobs for a user.</p>
       </div>
-      <div class="request-container">
-        <div class="methods-container">
-          <p>GET /job/get-job-id/{id}</p>
-          <p>to list datas of a job from a user.</p>
-        </div>
-        <div class="body-response-container">
-          <p>request body here</p>
-          <p>response here</p>
-        </div>
-      </div>
-      <div class="request-container">
-        <div class="methods-container">
-          <p>GET /job/get-all-jobs-for-a-user</p>
-          <p>to list all posted jobs of a user.</p>
-        </div>
-        <div class="body-response-container">
-          <p>request body here</p>
-          <p>response here</p>
-        </div>
-      </div>
-      <div class="request-container">
-        <div class="methods-container">
-          <p>PATCH /job/update-job/{id}</p>
-          <p>to update datas of a job from a user.</p>
-        </div>
-        <div class="body-response-container">
-          <p>request body here</p>
-          <p>response here</p>
-        </div>
-      </div>
-      <div class="request-container">
-        <div class="methods-container">
-          <p>DELETE /jobs/delete-job/{id}</p>
-          <p>to delete a job from.</p>
-        </div>
-        <div class="body-response-container">
-          <p>request body here</p>
-          <p>response here</p>
-        </div>
-      </div>
-      <div class="request-container">
-        <div class="methods-container">
-          <p>UPDATE /job/delete-all-jobs-for-a-user</p>
-          <p>to delete all jobs associated with a user.</p>
-        </div>
-        <div class="body-response-container">
-          <p>request body here</p>
-          <p>response here</p>
-        </div>
+      <div class="body-response-container">
+        <p>request body here</p>
+        <p>response here</p>
       </div>
     </div>
-  </body>
+    <div class="request-container">
+      <div class="methods-container">
+        <p>GET /job/get-job-id/{id}</p>
+        <p>to list datas of a job from a user.</p>
+      </div>
+      <div class="body-response-container">
+        <p>request body here</p>
+        <p>response here</p>
+      </div>
+    </div>
+    <div class="request-container">
+      <div class="methods-container">
+        <p>GET /job/get-all-jobs-for-a-user</p>
+        <p>to list all posted jobs of a user.</p>
+      </div>
+      <div class="body-response-container">
+        <p>request body here</p>
+        <p>response here</p>
+      </div>
+    </div>
+    <div class="request-container">
+      <div class="methods-container">
+        <p>PATCH /job/update-job/{id}</p>
+        <p>to update datas of a job from a user.</p>
+      </div>
+      <div class="body-response-container">
+        <p>request body here</p>
+        <p>response here</p>
+      </div>
+    </div>
+    <div class="request-container">
+      <div class="methods-container">
+        <p>DELETE /jobs/delete-job/{id}</p>
+        <p>to delete a job from.</p>
+      </div>
+      <div class="body-response-container">
+        <p>request body here</p>
+        <p>response here</p>
+      </div>
+    </div>
+    <div class="request-container">
+      <div class="methods-container">
+        <p>UPDATE /job/delete-all-jobs-for-a-user</p>
+        <p>to delete all jobs associated with a user.</p>
+      </div>
+      <div class="body-response-container">
+        <p>request body here</p>
+        <p>response here</p>
+      </div>
+    </div>
+  </div>
+</body>
+<script>
+  document.addEventListener('DOMContentLoaded', (event) => {
+    hljs.highlightAll();
+  });
+</script>
+
 </html>

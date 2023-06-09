@@ -58,3 +58,28 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
+
+.container {
+  display: flex;
+}
+
+.request-column,
+.response-column {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  margin: 5px;
+}
+
+.body-container {
+  margin-bottom: 10px;
+}
+
+.request-column {
+  background-color: #f2f2f2;
+}
+
+.response-column {
+  background-color: #e6e6e6;
+}
+
