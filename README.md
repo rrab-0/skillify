@@ -1,5 +1,5 @@
 # skillify 🚀
-Bangkit Academy's 2023 Product Capstone Project
+C23-PR506 - Bangkit Academy's 2023 Product Capstone Project
 
 Skillify: <br />
 Tinder-like android application for 'recruiters' and 'job seekers' with a machine learning recommendation system.
