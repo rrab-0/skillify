@@ -292,64 +292,186 @@
       <span class="title-span">to perform operations on jobs a user posted such as adding, listing,
         updating, and deleting.</span>
     </h2>
-    <div class="request-container">
-      <div class="methods-container">
-        <p>POST /job/add-job</p>
-        <p>to add jobs for a user.</p>
+
+    <div class="container">
+      <div class="request-column">
+        <div class="methods-container">
+          <p>POST /job/add-job</p>
+          <p>to add jobs for a user.</p>
+        </div>
+        <div class="body-container">
+          <h4>Request</h4>
+          <pre><code class="language-json">
+      {
+        "userId": "f2a3d0c7-b90a-41f0-b0fb-73c665b4483a",
+        "jobTitle": "IT engineer",
+        "description": "Pekerjaan untuk yang tertarik dengan teknologi",
+        "qualifications": "menguasai html",
+        "companyName": "PT ABC",
+        "address": "Jl mawar",
+        "phoneNumber": "08123445232",
+        "email": "your@mail.com",
+        "website": "abc.co.id",
+        "linkedIn": "linkedin.com/abc"
+      }
+          </code></pre>
+        </div>
       </div>
-      <div class="body-response-container">
-        <p>request body here</p>
-        <p>response here</p>
-      </div>
-    </div>
-    <div class="request-container">
-      <div class="methods-container">
-        <p>GET /job/get-job-id/{id}</p>
-        <p>to list datas of a job from a user.</p>
-      </div>
-      <div class="body-response-container">
-        <p>request body here</p>
-        <p>response here</p>
-      </div>
-    </div>
-    <div class="request-container">
-      <div class="methods-container">
-        <p>GET /job/get-all-jobs-for-a-user</p>
-        <p>to list all posted jobs of a user.</p>
-      </div>
-      <div class="body-response-container">
-        <p>request body here</p>
-        <p>response here</p>
-      </div>
-    </div>
-    <div class="request-container">
-      <div class="methods-container">
-        <p>PATCH /job/update-job/{id}</p>
-        <p>to update datas of a job from a user.</p>
-      </div>
-      <div class="body-response-container">
-        <p>request body here</p>
-        <p>response here</p>
-      </div>
-    </div>
-    <div class="request-container">
-      <div class="methods-container">
-        <p>DELETE /jobs/delete-job/{id}</p>
-        <p>to delete a job from.</p>
-      </div>
-      <div class="body-response-container">
-        <p>request body here</p>
-        <p>response here</p>
+      <div class="response-column">
+        <div class="body-container">
+          <h4>Response</h4>
+          <pre><code class="language-json">
+      {
+        "userId": "f2a3d0c7-b90a-41f0-b0fb-73c665b4483a",
+        "createdAt": "2023-6-9 11:22:38",
+        "id": "6d78a5a0-d890-4f0e-8911-cd03ec8fb658",
+        "jobTitle": "IT engineer",
+        "description": "Pekerjaan untuk yang tertarik dengan teknologi",
+        "qualifications": "menguasai html",
+        "companyName": "PT ABC",
+        "address": "Jl mawar",
+        "phoneNumber": "08123445232",
+        "email": "your@mail.com",
+        "website": "abc.co.id",
+        "linkedIn": "linkedin.com/abc"
+      }
+          </code></pre>
+        </div>
       </div>
     </div>
-    <div class="request-container">
-      <div class="methods-container">
-        <p>UPDATE /job/delete-all-jobs-for-a-user</p>
-        <p>to delete all jobs associated with a user.</p>
+
+    <div class="container">
+      <div class="request-column">
+        <div class="methods-container">
+          <p>GET /job/get-job-id/{id}</p>
+          <p>to list datas of a job from a user.</p>
+        </div>
       </div>
-      <div class="body-response-container">
-        <p>request body here</p>
-        <p>response here</p>
+      <div class="response-column">
+        <div class="body-container">
+          <h4>Response</h4>
+          <pre><code class="language-json">
+      {
+        "userId": "f2a3d0c7-b90a-41f0-b0fb-73c665b4483a",
+        "createdAt": "2023-6-9 11:22:38",
+        "id": "6d78a5a0-d890-4f0e-8911-cd03ec8fb658",
+        "jobTitle": "IT engineer",
+        "description": "Pekerjaan untuk yang tertarik dengan teknologi",
+        "qualifications": "menguasai html",
+        "companyName": "PT ABC",
+        "address": "Jl mawar",
+        "phoneNumber": "08123445232",
+        "email": "your@mail.com",
+        "website": "abc.co.id",
+        "linkedIn": "linkedin.com/abc"
+      }
+          </code></pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="request-column">
+        <div class="methods-container">
+          <p>GET /job/get-all-jobs-for-a-user?userId={userId}</p>
+          <p>to list all posted jobs of a user.</p>
+        </div>
+      </div>
+      <div class="response-column">
+        <div class="body-container">
+          <h4>Response</h4>
+          <pre><code class="language-json">
+      [
+        {
+            "userId": "f2a3d0c7-b90a-41f0-b0fb-73c665b4483a",
+            "createdAt": "2023-6-9 11:22:38",
+            "id": "6d78a5a0-d890-4f0e-8911-cd03ec8fb658",
+            "jobTitle": "IT engineer",
+            "description": "Pekerjaan untuk yang tertarik dengan teknologi",
+            "qualifications": "menguasai html",
+            "companyName": "PT ABC",
+            "address": "Jl mawar",
+            "phoneNumber": "08123445232",
+            "email": "your@mail.com",
+            "website": "abc.co.id",
+            "linkedIn": "linkedin.com/abc"
+        },
+        {
+            "userId": "f2a3d0c7-b90a-41f0-b0fb-73c665b4483a",
+            "createdAt": "2023-6-9 11:28:26",
+            "id": "a74646e5-2659-4fc6-8ac5-aabb658a955f",
+            "jobTitle": "IT engineer Manager",
+            "description": "Pekerjaan untuk yang berpengalaman dengan teknologi",
+            "qualifications": "menguasai html CSS",
+            "companyName": "PT ABC",
+            "address": "Jl mawar",
+            "phoneNumber": "08123445232",
+            "email": "your@mail.com",
+            "website": "abc.co.id",
+            "linkedIn": "linkedin.com/abc"
+        }
+      ]
+          </code></pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="request-column">
+        <div class="methods-container">
+          <p>PATCH /job/update-job/{id}</p>
+          <p>to update datas of a job from a user.</p>
+        </div>
+        <div class="body-container">
+          <h4>Request</h4>
+          <pre><code class="language-json">
+      {
+        "qualifications": "Mahir CSS dan JS"
+      }
+          </code></pre>
+        </div>
+      </div>
+      <div class="response-column">
+        <div class="body-container">
+          <h4>Response</h4>
+          <pre><code class="language-json">
+      Job updated successfully
+          </code></pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="request-column">
+        <div class="methods-container">
+          <p>DELETE /jobs/delete-job/{id}</p>
+          <p>to delete a job from.</p>
+        </div>
+      </div>
+      <div class="response-column">
+        <div class="body-container">
+          <h4>Response</h4>
+          <pre><code class="language-json">
+      Job deleted successfully
+          </code></pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="request-column">
+        <div class="methods-container">
+          <p>DELETE /job/delete-all-jobs-for-a-user?userId={userId}</p>
+          <p>to delete all jobs associated with a user.</p>
+        </div>
+      </div>
+      <div class="response-column">
+        <div class="body-container">
+          <h4>Response</h4>
+          <pre><code class="language-json">
+      Jobs deleted successfully
+          </code></pre>
+        </div>
       </div>
     </div>
   </div>
