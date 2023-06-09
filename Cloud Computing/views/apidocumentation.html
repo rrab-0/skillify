@@ -6,12 +6,6 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>API Documentation</title>
-  <!-- 
-      delete below line if production 
-      <link rel="stylesheet" type="text/css" href="./style.css" />
-      also don't forget to copy views/style.css to public/style.css
-    -->
-  <link rel="stylesheet" type="text/css" href="./style.css" />
   <link rel="stylesheet" type="text/css" href="/style.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
@@ -20,23 +14,69 @@
 
 <body>
   <div class="title-container">
-    <h1>Skillify API Documentation</h1>
+    <h1>Skillify API Documentation <a class="github-link" href="https://github.com/rrab-0/skillify"><svg class="github-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-github" viewBox="0 0 16 16">
+      <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+    </svg></a></h1>
     <p>
-      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quisquam rerum
-      dignissimos atque eaque itaque, possimus accusantium eius asperiores
-      illo illum aliquid minima laborum quidem. Ipsam nisi reiciendis
-      consequuntur dolor quidem.
+      This is the API documentation for C23-PR506's product capstone.
     </p>
   </div>
 
   <div class="register-flow-container">
-    <h2>User register flow</h2>
+    <h2>Workflow</h2>
+    <p>All methods need an Authorization header, token can be obtained after user is registered successfully.</p>
     <p>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum harum
-      commodi repellendus culpa eos veniam suscipit unde, porro sed repellat
-      natus magnam possimus deleniti dolorem quaerat ad, tempore asperiores
-      corporis!
+      The typical workflow is as follows:
     </p>
+    <ol>
+      <li>
+        User registers with /user/register.
+      </li>
+      <li>
+        User obtains token and add a profile photo with /upload.
+      </li>
+      <li>
+        User adds datas with /user/add-user-data/{id}, id is uuid provided in register's response.
+      </li>
+      <li>
+        User can list, update, or delete their user datas here.
+      </li>
+      <li>
+        User adds job datas with /job/add-job.
+      </li>
+      <li>
+        User can list, update, delete a single job, or delete their entire jobs here.
+      </li>
+    </ol>
+  </div>
+
+  <div class="upload-container">
+    <h2>
+      Uploads
+      <span class="title-span">to upload files such as profile photo, CV, company photos, etc.
+        and deleting.</span>
+    </h2>
+    <div class="container">
+      <div class="request-column">
+        <div class="methods-container">
+          <p><span class="methods post-method">POST</span> /upload</p>
+          <p>to upload files used in user/job datas.</p>
+        </div>
+      </div>
+      <div class="response-column">
+        <div class="body-container">
+          <h4>Response</h4>
+          <pre><code class="language-json">
+            {
+              "message": "file uploaded",
+              "name": "cat.png",
+              "type": "image/png",
+              "downloadURL": "https://firebasestorage.googleapis.com/v0/b/bangkit-product-capstone.appspot.com/o/files%2Fref-1.png%20%20%20%20%20%20%20(9%3A3%3A19%20and%202023-6-8)?alt=media&token=be69817f-e0fa-4f73-9569-f4ab16f3d4ec"
+            }
+          </code></pre>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div class="user-container">
@@ -48,7 +88,7 @@
     <div class="container">
       <div class="request-column">
         <div class="methods-container">
-          <p>POST /user/register</p>
+          <p><span class="methods post-method">POST</span> /user/register</p>
           <p>to register a user.</p>
         </div>
         <div class="body-container">
@@ -77,7 +117,7 @@
     <div class="container">
       <div class="request-column">
         <div class="methods-container">
-          <p>POST /user/login</p>
+          <p><span class="methods post-method">POST</span> /user/login</p>
           <p>to login a user.</p>
         </div>
         <div class="body-container">
@@ -105,7 +145,7 @@
     <div class="container">
       <div class="request-column">
         <div class="methods-container">
-          <p>POST /user/add-user-data/{id}</p>
+          <p><span class="methods post-method">POST</span> /user/add-user-data/{id}</p>
           <p>to add user datas.</p>
         </div>
         <div class="body-container">
@@ -155,7 +195,7 @@
     <div class="container">
       <div class="request-column">
         <div class="methods-container">
-          <p>GET /user/get-user-data-by-id/{id}</p>
+          <p><span class="methods get-method">GET</span> /user/get-user-data-by-id/{id}</p>
           <p>to list datas of a user.</p>
         </div>
       </div>
@@ -186,7 +226,7 @@
     <div class="container">
       <div class="request-column">
         <div class="methods-container">
-          <p>GET /user/get-all-user</p>
+          <p><span class="methods get-method">GET</span> /user/get-all-user</p>
           <p>to list all users registered.</p>
         </div>
       </div>
@@ -247,7 +287,7 @@
     <div class="container">
       <div class="request-column">
         <div class="methods-container">
-          <p>UPDATE /user/update-user/{id}</p>
+          <p><span class="methods patch-method">PATCH</span> /user/update-user/{id}</p>
           <p>to update user's data.</p>
         </div>
         <div class="body-container">
@@ -272,7 +312,7 @@
     <div class="container">
       <div class="request-column">
         <div class="methods-container">
-          <p>DELETE /user/delete-user/{id}</p>
+          <p><span class="methods delete-method">DELETE</span> /user/delete-user/{id}</p>
           <p>to delete user's data.</p>
         </div>
       </div>
@@ -296,7 +336,7 @@
     <div class="container">
       <div class="request-column">
         <div class="methods-container">
-          <p>POST /job/add-job</p>
+          <p><span class="methods post-method">POST</span> /job/add-job</p>
           <p>to add jobs for a user.</p>
         </div>
         <div class="body-container">
@@ -343,7 +383,7 @@
     <div class="container">
       <div class="request-column">
         <div class="methods-container">
-          <p>GET /job/get-job-id/{id}</p>
+          <p><span class="methods get-method">GET</span> /job/get-job-id/{id}</p>
           <p>to list datas of a job from a user.</p>
         </div>
       </div>
@@ -373,7 +413,7 @@
     <div class="container">
       <div class="request-column">
         <div class="methods-container">
-          <p>GET /job/get-all-jobs-for-a-user?userId={userId}</p>
+          <p><span class="methods get-method">GET</span> /job/get-all-jobs-for-a-user?userId={userId}</p>
           <p>to list all posted jobs of a user.</p>
         </div>
       </div>
@@ -419,7 +459,7 @@
     <div class="container">
       <div class="request-column">
         <div class="methods-container">
-          <p>PATCH /job/update-job/{id}</p>
+          <p><span class="methods patch-method">PATCH</span> /job/update-job/{id}</p>
           <p>to update datas of a job from a user.</p>
         </div>
         <div class="body-container">
@@ -444,7 +484,7 @@
     <div class="container">
       <div class="request-column">
         <div class="methods-container">
-          <p>DELETE /jobs/delete-job/{id}</p>
+          <p><span class="methods delete-method">DELETE</span> /jobs/delete-job/{id}</p>
           <p>to delete a job from.</p>
         </div>
       </div>
@@ -461,7 +501,7 @@
     <div class="container">
       <div class="request-column">
         <div class="methods-container">
-          <p>DELETE /job/delete-all-jobs-for-a-user?userId={userId}</p>
+          <p><span class="methods delete-method">DELETE</span> /job/delete-all-jobs-for-a-user?userId={userId}</p>
           <p>to delete all jobs associated with a user.</p>
         </div>
       </div>
