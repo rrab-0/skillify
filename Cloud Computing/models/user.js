@@ -1,6 +1,5 @@
 class User {
   constructor(
-    id,
     firstName,
     lastName,
     age,
@@ -13,10 +12,8 @@ class User {
     address,
     phoneNumber,
     email,
-    // links could be empty array for later
     links
   ) {
-    this.id = id;
     this.firstName = firstName;
     this.lastName = lastName;
     this.age = age;

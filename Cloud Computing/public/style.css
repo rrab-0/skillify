@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+
+:root {
+  --green: #49cc90;
+  --blue: #61affe;
+  --yellow: #4e64de;
+  --red: #f93e3e;
+}
+
+* {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  padding: 4em 8em;
+  display: flex;
+  flex-direction: column;
+  gap: 3em;
+}
+
+.title-container,
+.register-flow-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  text-align: justify;
+}
+
+.github-icon {
+  color: black;
+}
+
+.upload-container,
+.user-container,
+.job-container {
+  display: flex;
+  flex-direction: column;
+  gap: 3em;
+}
+
+.upload-container h2,
+.user-container h2,
+.job-container h2 {
+  width: max-content;
+  padding-bottom: 10px;
+  border-bottom: 4px solid gray;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+}
+
+.response-column .body-container {
+  padding-bottom: 3em;
+  border-bottom: 1px solid gray;
+}
+
+.body-container h4 {
+  padding-top: 2em;
+  padding-bottom: 1em;
+}
+
+.title-span {
+  padding-left: 1.2em;
+  font-size: small;
+  font-weight: 400;
+}
+
+.request-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.body-response-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.methods {
+  font-weight: 700;
+  padding: 0.25em;
+}
+
+.post-method {
+  color: var(--green);
+}
+
+.get-method {
+  color: var(--blue);
+}
+
+.patch-method {
+  color: var(--yellow);
+}
+
+.delete-method {
+  color: var(--red);
+}

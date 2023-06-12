@@ -2,14 +2,23 @@ const express = require('express');
 const router = express.Router();
 
 const {
-  addUser,
-  getUserId,
-  getAllUser,
+  addUserData,
+  getUserDataById,
+  getAllUsersData,
+  deleteUser,
+  registerUser,
+  loginUser,
+  updateUser,
+  authenticateToken,
 } = require('../controllers/userController');
 
-router.post('/add-user', addUser);
-router.get('/get-user-id/:id', getUserId);
-router.get('/get-all-user', getAllUser);
+router.post('/register', registerUser);
+router.post('/login', loginUser);
+router.post('/add-user-data/:id',authenticateToken, addUserData);
+router.get('/get-user-data-by-id/:id', authenticateToken, getUserDataById);
+router.get('/get-all-user', authenticateToken, getAllUsersData);
+router.patch('/update-user/:id', authenticateToken, updateUser);
+router.delete('/delete-user/:id', authenticateToken, deleteUser);
 
 module.exports = {
   routes: router,
