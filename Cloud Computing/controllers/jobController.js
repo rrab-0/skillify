@@ -84,7 +84,7 @@ const getJobId = async (req, res) => {
         //
         jobTitle: data.jobTitle,
         description: data.description,
-        qualifications: data.qualifications,
+        qualifications: data.qualifications, // dont need this
         companyName: data.companyName,
         address: data.address, // https://randomuser.me/
         phoneNumber: data.phoneNumber, // https://randomuser.me/
