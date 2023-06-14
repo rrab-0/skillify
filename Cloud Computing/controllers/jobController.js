@@ -66,13 +66,14 @@ const getJobId = async (req, res) => {
         userId: data.userId,
         createdAt: data.createdAt,
         id: jobId,
+        //
         jobTitle: data.jobTitle,
         description: data.description,
         qualifications: data.qualifications,
         companyName: data.companyName,
-        address: data.address,
-        phoneNumber: data.phoneNumber,
-        email: data.email,
+        address: data.address, // https://randomuser.me/
+        phoneNumber: data.phoneNumber, // https://randomuser.me/
+        email: data.email, // https://randomuser.me/
         website: data.website,
         linkedIn: data.linkedIn,
       };
