@@ -6,6 +6,7 @@ Input user yang dikirim ke model Machine Learning
 - employment_type => DROPDOWN
 - job_function => DROPDOWN atau *kalau bisa Multiple job_function (kayak skill di linkedin) formatnya dipisah koma tanpa spasi contohnya 'Biomedis,Bioteknologi'
 - company_industry => DROPDOWN
+- job_title => new dropdown
 
 Detail Data
 
