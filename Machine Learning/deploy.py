@@ -159,6 +159,11 @@ def predict():
     # RETURN PREDICTION
     response = matched_rows.to_json(orient='records')
     return response
+
+@app.route("/")
+def hello_world():
+    return "<p>service is up and running.</p>"
+
 if __name__ == '__main__':
     # app.run(debug=True)
     app.run(debug=True, host="0.0.0.0", port=8080)

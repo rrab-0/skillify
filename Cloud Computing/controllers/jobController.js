@@ -37,6 +37,21 @@ const outputsML = async (req, res) => {
   }
 };
 
+const addDummyJob = async (req, res) => {
+  try {
+    const currentDateTime = giveCurrentDateTime();
+    const id = req.body.id;
+    const data = req.body;
+    const jobDoc = doc(actualDb, 'jobs', id);
+    await setDoc(jobDoc, { ...data, createdAt: currentDateTime });
+
+    res.redirect(`/job/get-job-id/${id}`);
+    console.log(`${currentDateTime} with id: ${id} record saved`);
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
+};
+
 const addJob = async (req, res) => {
   try {
     const uuid = uuidv4();
