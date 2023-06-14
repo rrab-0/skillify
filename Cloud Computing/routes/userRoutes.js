@@ -14,7 +14,7 @@ const {
 
 router.post('/register', registerUser);
 router.post('/login', loginUser);
-router.post('/add-user-data/:id',authenticateToken, addUserData);
+router.post('/add-user-data/:id', authenticateToken, addUserData);
 router.get('/get-user-data-by-id/:id', authenticateToken, getUserDataById);
 router.get('/get-all-user', authenticateToken, getAllUsersData);
 router.patch('/update-user/:id', authenticateToken, updateUser);

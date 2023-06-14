@@ -29,6 +29,14 @@ const giveCurrentDateTime = () => {
   return dateTime;
 };
 
+const outputsML = async (req, res) => {
+  try {
+    //
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
+};
+
 const addJob = async (req, res) => {
   try {
     const uuid = uuidv4();
@@ -171,6 +179,7 @@ const deleteAllJobOfOneUser = async (req, res) => {
 };
 
 module.exports = {
+  outputsML,
   addJob,
   getJobId,
   getAllJobOfOneUser,

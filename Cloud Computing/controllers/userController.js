@@ -33,6 +33,8 @@ const giveCurrentDateTime = () => {
 const registerUser = async (req, res) => {
   try {
     const { username, password } = req.body;
+
+    // query to firebase
     const usernameQuery = query(
       collection(actualDb, 'registeredUsers'),
       where('username', '==', username)
@@ -41,6 +43,7 @@ const registerUser = async (req, res) => {
     if (!usernameSnapshot.empty) {
       return res.status(400).json({ error: 'Username already exists' });
     }
+
     const hashedPassword = await bcrypt.hash(password, 10);
     const uuid = uuidv4();
     const userDocRef = doc(actualDb, 'registeredUsers', uuid);
@@ -60,7 +63,7 @@ const loginUser = async (req, res) => {
   try {
     const { username, password } = req.body;
     const usersCollection = collection(actualDb, 'registeredUsers');
-    console.log(usersCollection);
+    // console.log(usersCollection);
     const querySnapshot = await getDocs(
       query(usersCollection, where('username', '==', username))
     );
@@ -68,6 +71,7 @@ const loginUser = async (req, res) => {
       res.status(404).json({ message: 'User not found' });
       return;
     }
+
     const userDoc = querySnapshot.docs[0];
     const userData = userDoc.data();
     const hashedPassword = userData.password;
@@ -77,7 +81,7 @@ const loginUser = async (req, res) => {
       const token = jwt.sign({ userId: userDoc.id }, 'secret_key', {
         expiresIn: '1h',
       });
-      res.status(200).json({ token });
+      res.status(200).json({ userId: userDoc.id, token });
     } else {
       res.status(401).json({ message: 'Invalid credentials' });
     }
@@ -158,9 +162,6 @@ const getAllUsersData = async (req, res) => {
       const data = doc.data();
       const responseObject = {
         id: doc.id,
-        createdAt: data.createdAt,
-        username: data.username,
-        password: data.password,
         fullName: data.fullName,
         age: data.age,
         description: data.description,

@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const {
+  outputsML,
   addJob,
   getJobId,
   getAllJobOfOneUser,
@@ -10,16 +11,19 @@ const {
   updateJob,
 } = require('../controllers/jobController');
 
-const {
-  authenticateToken,
-} = require('../controllers/userController');
+const { authenticateToken } = require('../controllers/userController');
 
+router.post('/ml', authenticateToken, outputsML);
 router.post('/add-job', authenticateToken, addJob);
 router.get('/get-job-id/:id', authenticateToken, getJobId);
 router.get('/get-all-jobs-for-a-user', authenticateToken, getAllJobOfOneUser);
 router.patch('/update-job/:id', authenticateToken, updateJob);
 router.delete('/delete-job/:id', authenticateToken, deleteJob);
-router.delete('/delete-all-jobs-for-a-user', authenticateToken, deleteAllJobOfOneUser);
+router.delete(
+  '/delete-all-jobs-for-a-user',
+  authenticateToken,
+  deleteAllJobOfOneUser
+);
 
 module.exports = {
   routes: router,
