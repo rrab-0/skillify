@@ -129,8 +129,7 @@ const getUserDataById = async (req, res) => {
       const data = userData.data();
       const userWithId = {
         id: userId,
-        firstName: data.firstName,
-        lastName: data.lastName,
+        fullName: data.fullName,
         age: data.age,
         description: data.description,
         profilePhoto: data.profilePhoto,
@@ -162,8 +161,7 @@ const getAllUsersData = async (req, res) => {
         createdAt: data.createdAt,
         username: data.username,
         password: data.password,
-        firstName: data.firstName,
-        lastName: data.lastName,
+        fullName: data.fullName,
         age: data.age,
         description: data.description,
         profilePhoto: data.profilePhoto,
