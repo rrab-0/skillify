@@ -160,4 +160,5 @@ def predict():
     response = matched_rows.to_json(orient='records')
     return response
 if __name__ == '__main__':
-    app.run(debug=True)
+    # app.run(debug=True)
+    app.run(debug=True, host="0.0.0.0", port=int(os.environ.get("PORT", 8080)))
