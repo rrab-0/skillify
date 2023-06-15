@@ -78,7 +78,7 @@ const postToML = async (data) => {
 const getJobPreference = async (req, res) => {
   try {
     const data = req.body;
-    postToML(data);
+    res.send(postToML(data));
   } catch (error) {
     res.status(400).send(error.message);
   }
