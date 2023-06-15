@@ -9,10 +9,9 @@ const {
   collection,
   query,
   where,
-  orderBy,
   getDocs,
   deleteDoc,
-  serverTimestamp,
+  limit,
 } = require('firebase/firestore');
 const { doc, setDoc } = require('firebase/firestore');
 const actualDb = getFirestore(db);
@@ -27,6 +26,100 @@ const giveCurrentDateTime = () => {
     today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
   const dateTime = date + ' ' + time;
   return dateTime;
+};
+
+// to add dummy datas from a json file,
+// problem at userId, the jobs will be unique but the user is only one guy
+const addDummyJob = async (req, res) => {
+  try {
+    const currentDateTime = giveCurrentDateTime();
+    const data = req.body;
+
+    // console.log(data[1].id);
+
+    // data.forEach(async (datas) => {
+    //   console.log(datas.id);
+    // });
+
+    data.forEach(async (datas) => {
+      const jobDoc = doc(actualDb, 'jobs', datas.id);
+      await setDoc(jobDoc, { ...datas, createdAt: currentDateTime });
+      console.log('jobs saved');
+    });
+
+    res.send('jobs saved');
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
+};
+
+// post to ml
+const postToML = async (data) => {
+  const postToMLdatas = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data), // Convert data to JSON string
+  };
+
+  try {
+    const response = await fetch(
+      'https://skillify-ml-webservice-boq7zjhvoq-et.a.run.app/predict',
+      postToMLdatas
+    );
+    const dataRes = await response.json();
+    return dataRes;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+// get jobs preferences
+const getJobPreference = async (req, res) => {
+  try {
+    const data = req.body;
+    const newData = await postToML(data);
+    const jobIds = newData.map((datas) => datas.id.toString());
+
+    const jobsQuery = query(
+      collection(actualDb, 'jobs'),
+      where('id', 'in', jobIds)
+    );
+
+    const querySnapshot = await getDocs(jobsQuery);
+    let responseArr = [];
+    querySnapshot.forEach((doc) => {
+      const data = doc.data();
+      const responseObject = {
+        userId: data.userId,
+        createdAt: data.createdAt,
+        id: doc.id,
+        // job datas
+        jobTitle: data.jobTitle,
+        description: data.description,
+        companyName: data.companyName,
+        address: data.address,
+        phoneNumber: data.phoneNumber,
+        email: data.email,
+        website: data.website,
+        linkedIn: data.linkedIn,
+        // ml datas
+        location: data.location,
+        company_industry: data.company_industry,
+        carrer_level: data.career_level,
+        experience_level: data.experience_level,
+        education_level: data.education_level,
+        employment_type: data.employment_type,
+        job_function: data.job_function,
+      };
+      responseArr.push(responseObject);
+    });
+
+    res.status(200).json(responseArr);
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
 };
 
 const addJob = async (req, res) => {
@@ -58,15 +151,23 @@ const getJobId = async (req, res) => {
         userId: data.userId,
         createdAt: data.createdAt,
         id: jobId,
+        // job datas
         jobTitle: data.jobTitle,
         description: data.description,
-        qualifications: data.qualifications,
         companyName: data.companyName,
         address: data.address,
         phoneNumber: data.phoneNumber,
         email: data.email,
         website: data.website,
         linkedIn: data.linkedIn,
+        // ml datas
+        location: data.location,
+        company_industry: data.company_industry,
+        carrer_level: data.career_level,
+        experience_level: data.experience_level,
+        education_level: data.education_level,
+        employment_type: data.employment_type,
+        job_function: data.job_function,
       };
       res.send(jobWithId);
     }
@@ -81,7 +182,8 @@ const getAllJobOfOneUser = async (req, res) => {
     const allJobCollection = collection(actualDb, 'jobs');
     const allJobOfOneUserQuery = query(
       allJobCollection,
-      where('userId', '==', userId)
+      where('userId', '==', userId),
+      limit(100)
     );
     const allJobOfOneUserSnapshot = await getDocs(allJobOfOneUserQuery);
 
@@ -92,15 +194,23 @@ const getAllJobOfOneUser = async (req, res) => {
         userId: data.userId,
         createdAt: data.createdAt,
         id: doc.id,
+        // job datas
         jobTitle: data.jobTitle,
         description: data.description,
-        qualifications: data.qualifications,
         companyName: data.companyName,
         address: data.address,
         phoneNumber: data.phoneNumber,
         email: data.email,
         website: data.website,
         linkedIn: data.linkedIn,
+        // ml datas
+        location: data.location,
+        company_industry: data.company_industry,
+        carrer_level: data.career_level,
+        experience_level: data.experience_level,
+        education_level: data.education_level,
+        employment_type: data.employment_type,
+        job_function: data.job_function,
       };
       responseArr.push(responseObject);
     });
@@ -171,6 +281,8 @@ const deleteAllJobOfOneUser = async (req, res) => {
 };
 
 module.exports = {
+  getJobPreference,
+  addDummyJob,
   addJob,
   getJobId,
   getAllJobOfOneUser,

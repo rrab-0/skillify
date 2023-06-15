@@ -33,6 +33,9 @@ const giveCurrentDateTime = () => {
 const registerUser = async (req, res) => {
   try {
     const { username, password } = req.body;
+    const currentDateTime = giveCurrentDateTime();
+
+    // query to firebase
     const usernameQuery = query(
       collection(actualDb, 'registeredUsers'),
       where('username', '==', username)
@@ -41,11 +44,12 @@ const registerUser = async (req, res) => {
     if (!usernameSnapshot.empty) {
       return res.status(400).json({ error: 'Username already exists' });
     }
+
     const hashedPassword = await bcrypt.hash(password, 10);
     const uuid = uuidv4();
     const userDocRef = doc(actualDb, 'registeredUsers', uuid);
     await setDoc(userDocRef, {
-      createdAt: giveCurrentDateTime(),
+      createdAt: currentDateTime,
       username: username,
       password: hashedPassword,
     });
@@ -60,7 +64,7 @@ const loginUser = async (req, res) => {
   try {
     const { username, password } = req.body;
     const usersCollection = collection(actualDb, 'registeredUsers');
-    console.log(usersCollection);
+    // console.log(usersCollection);
     const querySnapshot = await getDocs(
       query(usersCollection, where('username', '==', username))
     );
@@ -68,6 +72,7 @@ const loginUser = async (req, res) => {
       res.status(404).json({ message: 'User not found' });
       return;
     }
+
     const userDoc = querySnapshot.docs[0];
     const userData = userDoc.data();
     const hashedPassword = userData.password;
@@ -77,7 +82,7 @@ const loginUser = async (req, res) => {
       const token = jwt.sign({ userId: userDoc.id }, 'secret_key', {
         expiresIn: '1h',
       });
-      res.status(200).json({ token });
+      res.status(200).json({ userId: userDoc.id, token });
     } else {
       res.status(401).json({ message: 'Invalid credentials' });
     }
@@ -129,8 +134,7 @@ const getUserDataById = async (req, res) => {
       const data = userData.data();
       const userWithId = {
         id: userId,
-        firstName: data.firstName,
-        lastName: data.lastName,
+        fullName: data.fullName,
         age: data.age,
         description: data.description,
         profilePhoto: data.profilePhoto,
@@ -159,11 +163,7 @@ const getAllUsersData = async (req, res) => {
       const data = doc.data();
       const responseObject = {
         id: doc.id,
-        createdAt: data.createdAt,
-        username: data.username,
-        password: data.password,
-        firstName: data.firstName,
-        lastName: data.lastName,
+        fullName: data.fullName,
         age: data.age,
         description: data.description,
         profilePhoto: data.profilePhoto,

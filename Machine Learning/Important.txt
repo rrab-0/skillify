@@ -1,0 +1,398 @@
+Input user yang dikirim ke model Machine Learning
+- location => DROPDOWN
+- career_level => DROPDOWN
+- experience_level => DROPDOWN
+- education_level => DROPDOWN
+- employment_type => DROPDOWN
+- job_function => DROPDOWN atau *kalau bisa Multiple job_function (kayak skill di linkedin) formatnya dipisah koma tanpa spasi contohnya 'Biomedis,Bioteknologi'
+- company_industry => DROPDOWN
+- job_title => new dropdown
+
+Detail Data
+
+=> education_level
+D3 (Diploma)
+D4 (Diploma)
+Diploma Pascasarjana
+Doktor (S3)
+Gelar Professional
+Magister (S2)
+SMA
+SMU/SMK/STM
+Sarjana (S1)
+Sertifikat Professional
+Tidak terspesifikasi
+
+=>job_function
+Aktuaria/Statistik
+Akuntansi / Keuangan
+Akuntansi Umum / Pembiayaan
+Angkatan Bersenjata      
+Arsitek/Desain Interior
+Audit & Pajak
+Bangunan/Konstruksi
+Biomedis
+Bioteknologi
+Diagnosa/Lainnya
+Digital Marketing
+E-commerce
+Farmasi
+Geologi/Geofisika
+Hiburan
+Hotel/Pariwisata
+Hotel/Restoran
+Hubungan Masyarakat
+IT-Admin Jaringan/Sistem/Database
+IT-Perangkat Keras
+IT-Perangkat Lunak
+Jurnalis/Editor
+Keuangan / Investasi Perusahaan
+Kimia
+Komputer/Teknologi Informasi
+Kontrol Proses
+Lainnya
+Lainnya/Kategori tidak tersedia
+Layanan Kesehatan
+Layanan Pelanggan
+Layanan Sosial/Konseling
+Logistik/Rantai Pasokan
+Makanan/Minuman/Pelayanan Restoran
+Manufaktur
+Mekanikal
+Merchandising
+Minyak/Gas
+Pekerjaan Umum
+Pelatihan & Pengembangan
+Pelayanan
+Pemasaran/Pengembangan Bisnis
+Pembelian/Manajemen Material
+Pemeliharaan
+Pendidikan
+Pendidikan/Pelatihan
+Penerbangan
+Penerbitan
+Pengacara / Asisten Legal
+Penjaminan Kualitas / QA
+Penjualan - Jasa Keuangan
+Penjualan - Korporasi
+Penjualan - Teknik/Teknikal/IT
+Penjualan / Pemasaran
+Penjualan Ritel
+Perawatan Pribadi
+Perbankan / Jasa Finansial
+Periklanan
+Pertanian
+Praktisi/Asisten Medis
+Properti/Real Estate
+Sains
+Sains & Teknologi
+Sekretaris
+Seni / Desain Kreatif
+Seni/Media/Komunikasi
+Staf / Administrasi umum
+Sumber Daya Manusia / HR
+Sumber Daya Manusia/Personalia
+Survei Kuantitas
+Teknik
+Teknik Elektro
+Teknik Elektronika
+Teknik Industri
+Teknik Kimia
+Teknik Lainnya
+Teknik Lingkungan
+Teknik Sipil/Konstruksi Bangunan
+Teknikal & Bantuan Pelanggan
+Teknologi Makanan/Ahli Gizi
+Telesales/Telemarketing
+Top Management / Manajemen Tingkat Atas
+
+=> location
+Aceh
+Ambon
+Asahan Kisaran
+Badung
+Balangan
+Bali
+Balikpapan
+Bandar Lampung
+Bandung
+Bangka
+Bangka Belitung
+Banjar
+Banjarbaru
+Banjarmasin
+Banjarnegara
+Banten
+Bantul
+Banyuwangi
+Barito Utara
+Batam
+Batu
+Bekasi
+Bengkulu
+Bima
+Binjai
+Bintan
+Bitung
+Blitar
+Bogor
+Bone
+Bontang
+Brebes
+Bukittinggi
+Bulungan
+Cianjur
+Cibinong
+Cikarang
+Cikupa
+Cilacap
+Cilegon
+Cileungsi
+Cimahi
+Cirebon
+Citeureup
+Demak
+Denpasar
+Depok
+Dumai
+Gianyar
+Gorontalo
+Gowa
+Gresik
+Gunung Mas
+Halmahera
+Hulu Sungai Tengah
+Jakarta Barat
+Jakarta Pusat
+Jakarta Raya
+Jakarta Selatan
+Jakarta Timur
+Jakarta Utara
+Jambi
+Jawa Barat
+Jawa Tengah
+Jawa Timur
+Jayapura
+Jember
+Jepara
+Kalimantan Barat
+Kalimantan Selatan
+Kalimantan Tengah
+Kalimantan Timur
+Kalimantan Utara
+Kapuas
+Karangasem
+Karawang
+Kediri
+Kendari
+Kepulauan Riau
+Kepulauan Seribu
+Ketapang
+Klaten
+Klungkung
+Kota Banda Aceh
+Kotabaru
+Kotawaringin Barat
+Kotawaringin Timur
+Kudus
+Kulon Progo
+Kupang
+Kuta
+Kutai Barat
+Kutai Kartanegara
+Kutai Timur
+Lampung
+Lhokseumawe
+Lombok
+Madiun
+Madura
+Magelang
+Mahakam Ulu
+Makassar
+Malang
+Malinau
+Maluku
+Maluku Barat
+Maluku Utara
+Mamuju
+Manado
+Manokwari
+Maros
+Mataram
+Medan
+Merauke
+Metro
+Meulaboh
+Minahasa
+Mojokerto
+Muara Enim
+Murung Raya
+Nias
+Nunukan
+Nusa Tenggara Barat
+Nusa Tenggara Timur
+Padang
+Padang Sidempuan
+Palangkaraya
+Palembang
+Palopo
+Palu
+Pandeglang
+Pangandaran
+Pangkal Pinang
+Papua
+Papua Barat
+Pare-Pare
+Paser
+Pasuruan
+Pekalongan
+Pekanbaru
+Pemalang
+Pematangsiantar
+Penajam Paser Utara
+Ponorogo
+Pontianak
+Poso
+Prabumulih
+Probolinggo
+Purbalingga
+Purwakarta
+Purwokerto
+Purworejo
+Rangkasbitung
+Riau
+Salatiga
+Samarinda
+Semarang
+Seminyak
+Serang
+Sibolga
+Sidoarjo
+Singkawang
+Sintang
+Sleman
+Sorong
+Sukabumi
+Sulawesi Barat
+Sulawesi Selatan
+Sulawesi Tengah
+Sulawesi Tenggara
+Sulawesi Utara
+Sumatera Barat
+Sumatera Selatan
+Sumatera Utara
+Sumbawa
+Surabaya
+Surakarta
+Tabalong
+Tanah Bumbu
+Tanah Laut
+Tangerang
+Tanjung Balai
+Tanjung Pinang
+Tapanuli
+Tarakan
+Tasikmalaya
+Tegal
+Ternate
+Timika
+Tuban
+Ubud
+Ungaran
+Wonogiri
+Yogyakarta
+
+=> career_level
+Manajer/Asisten Manajer
+Supervisor/Koordinator
+Pegawai (non-manajemen & non-supervisor)
+Lulusan baru/Pengalaman kerja kurang dari 1 tahun
+CEO/GM/Direktur/Manajer Senior
+
+=> experience_level
+5 tahun
+4 tahun
+2 tahun
+1 tahun
+3 tahun
+7 tahun
+6 tahun
+10 tahun
+8 tahun
+9 tahun
+15 tahun
+12 tahun
+14 tahun
+18 tahun
+20 tahun
+Lebih dari 20 Tahun
+11 tahun
+16 tahun
+17 tahun
+13 tahun
+
+=> employment_type
+Kontrak
+Paruh Waktu
+Penuh Waktu
+Temporer
+
+=>company_industry
+Agrikultural/Perkebunan/Peternakan Unggas/Perikanan
+Akunting / Audit / Layanan Pajak
+Asuransi
+Automobil/Mesin Tambahan Automotif/Kendaraan
+Bahan Kimia/Pupuk/Pestisida
+BioTeknologi/Farmasi/Riset klinik
+Call Center/IT-Enabled Services/BPO
+Elektrikal & Elektronik
+Hiburan/Media
+Hotel/Pariwisata
+Hukum/Legal
+Ilmu Pengetahuan & Teknologi
+Industri Berat/Mesin/Peralatan
+Jual Beli Saham/Sekuritas
+Jurnalisme
+Kayu/Fiber/Kertas
+Keamanan/Penegak hukum
+Kelautan/Aquakultur
+Kesehatan/Medis
+Komputer/Teknik Informatika (Perangkat Keras)
+Komputer/Teknik Informatika (Perangkat Lunak)
+Konstruksi/Bangunan/Teknik
+Konsultasi (Bisnis & Manajemen)
+Konsultasi (IT, Ilmu Pengetahuan, Teknis & Teknikal)
+Lainnya
+Layanan Umum/Tenaga Penggerak
+Lingkungan/Kesehatan/Keamanan
+Luar Angkasa/Aviasi/Pesawat Terbang
+Makanan & Minuman/Katering/Restoran
+Manajemen/Konsulting HR
+Manufaktur/Produksi
+Minyak/Gas/Petroleum
+Olahraga
+Organisasi Nirlaba/Pelayanan Sosial/LSM
+Pakaian
+Pameran/Manajemen acara/PIKP
+Pelayanan Arsitek/Desain Interior
+Pelayanan Perbaikan & Pemeliharaan
+Pemerintahan/Pertahanan
+Pendidikan
+Perawatan/Kecantikan/Fitnes
+Perbankan/Pelayanan Keuangan
+Percetakan/Penerbitan
+Periklanan/Marketing/Promosi/Hubungan Masyarakat
+Permata/Perhiasan
+Pertambangan
+Polymer/Plastik/Karet/Ban
+Produk Konsumen/Barang konsumen yang bergerak cepat
+Properti/Real Estate
+R&D
+Retail/Merchandise
+Seni/Desain/Fashion
+Tekstil/Garment
+Telekomunikasi
+Tembakau
+Transportasi/Logistik
+Travel/Pariwisata
+Umum & Grosir
