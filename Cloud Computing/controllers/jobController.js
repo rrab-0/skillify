@@ -80,13 +80,43 @@ const getJobPreference = async (req, res) => {
   try {
     const data = req.body;
     const newData = await postToML(data);
-    const jobIds = newData.map(datas => datas.id.toString());
-    console.log(jobIds);
+    const jobIds = newData.map((datas) => datas.id.toString());
 
-    const jobsQuery = query(collection(actualDb, 'jobs'), where('id', 'in', jobIds)); 
+    const jobsQuery = query(
+      collection(actualDb, 'jobs'),
+      where('id', 'in', jobIds)
+    );
+
     const querySnapshot = await getDocs(jobsQuery);
-    const jobs = querySnapshot.docs.map(doc => doc.data());
-    res.status(200).json(jobs);
+    let responseArr = [];
+    querySnapshot.forEach((doc) => {
+      const data = doc.data();
+      const responseObject = {
+        userId: data.userId,
+        createdAt: data.createdAt,
+        id: doc.id,
+        // job datas
+        jobTitle: data.jobTitle,
+        description: data.description,
+        companyName: data.companyName,
+        address: data.address,
+        phoneNumber: data.phoneNumber,
+        email: data.email,
+        website: data.website,
+        linkedIn: data.linkedIn,
+        // ml datas
+        location: data.location,
+        company_industry: data.company_industry,
+        carrer_level: data.career_level,
+        experience_level: data.experience_level,
+        education_level: data.education_level,
+        employment_type: data.employment_type,
+        job_function: data.job_function,
+      };
+      responseArr.push(responseObject);
+    });
+
+    res.status(200).json(responseArr);
   } catch (error) {
     res.status(400).send(error.message);
   }
