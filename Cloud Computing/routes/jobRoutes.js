@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const {
+  getJobPreference,
   addDummyJob,
   addJob,
   getJobId,
@@ -13,6 +14,7 @@ const {
 
 const { authenticateToken } = require('../controllers/userController');
 
+router.post('/get-job-preferences', authenticateToken, getJobPreference);
 router.post('/add-dummy-jobs', authenticateToken, addDummyJob);
 router.post('/add-job', authenticateToken, addJob);
 router.get('/get-job-id/:id', authenticateToken, getJobId);

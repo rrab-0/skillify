@@ -53,6 +53,37 @@ const addDummyJob = async (req, res) => {
   }
 };
 
+// post to ml
+const postToML = async (data) => {
+  const postToMLdatas = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: data,
+  };
+
+  //
+  try {
+    const response = await fetch('/predict', postToMLdatas);
+    const data = await response.json();
+    console.log(data);
+  } catch (error) {
+    // res.status(400).send(`ml endpoint error : ${error.message}`);
+    console.log(error);
+  }
+};
+
+// get jobs preferences
+const getJobPreference = async (req, res) => {
+  try {
+    const data = req.body;
+    postToML(data);
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
+};
+
 const addJob = async (req, res) => {
   try {
     const uuid = uuidv4();
@@ -212,6 +243,7 @@ const deleteAllJobOfOneUser = async (req, res) => {
 };
 
 module.exports = {
+  getJobPreference,
   addDummyJob,
   addJob,
   getJobId,
