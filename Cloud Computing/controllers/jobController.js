@@ -33,34 +33,21 @@ const giveCurrentDateTime = () => {
 const addDummyJob = async (req, res) => {
   try {
     const currentDateTime = giveCurrentDateTime();
-    const id = req.body.id;
-    const data = {
-      userId: req.body.userId,
-      createdAt: req.body.createdAt,
-      id: id,
-      // job datas
-      jobTitle: req.body.jobTitle,
-      description: req.body.description,
-      companyName: req.body.companyName,
-      address: req.body.address,
-      phoneNumber: req.body.phoneNumber,
-      email: req.body.email,
-      website: req.body.website,
-      linkedIn: req.body.linkedIn,
-      // ml request datas
-      location: req.body.location,
-      company_industry: req.body.company_industry,
-      carrer_level: req.body.career_level,
-      experience_level: req.body.experience_level,
-      education_level: req.body.education_level,
-      employment_type: req.body.employment_type,
-      job_function: req.body.job_function,
-    };
+    const data = req.body;
 
-    // apply datas to db
-    const jobDoc = doc(actualDb, 'jobs', id);
-    await setDoc(jobDoc, { data, createdAt: currentDateTime });
-    console.log(`${currentDateTime} with id: ${id} record saved`);
+    // console.log(data[1].id);
+
+    // data.forEach(async (datas) => {
+    //   console.log(datas.id);
+    // });
+
+    data.forEach(async (datas) => {
+      const jobDoc = doc(actualDb, 'jobs', datas.id);
+      await setDoc(jobDoc, { ...datas, createdAt: currentDateTime });
+      console.log('jobs saved');
+    });
+
+    res.send('jobs saved');
   } catch (error) {
     res.status(400).send(error.message);
   }
