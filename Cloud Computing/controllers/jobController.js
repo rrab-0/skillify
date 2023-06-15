@@ -9,10 +9,9 @@ const {
   collection,
   query,
   where,
-  orderBy,
   getDocs,
   deleteDoc,
-  serverTimestamp,
+  limit,
 } = require('firebase/firestore');
 const { doc, setDoc } = require('firebase/firestore');
 const actualDb = getFirestore(db);
@@ -29,23 +28,38 @@ const giveCurrentDateTime = () => {
   return dateTime;
 };
 
-const outputsML = async (req, res) => {
-  try {
-    //
-  } catch (error) {
-    res.status(400).send(error.message);
-  }
-};
-
+// to add dummy datas from a json file,
+// problem at userId, the jobs will be unique but the user is only one guy
 const addDummyJob = async (req, res) => {
   try {
     const currentDateTime = giveCurrentDateTime();
     const id = req.body.id;
-    const data = req.body;
-    const jobDoc = doc(actualDb, 'jobs', id);
-    await setDoc(jobDoc, { ...data, createdAt: currentDateTime });
+    const data = {
+      userId: req.body.userId,
+      createdAt: req.body.createdAt,
+      id: id,
+      // job datas
+      jobTitle: req.body.jobTitle,
+      description: req.body.description,
+      companyName: req.body.companyName,
+      address: req.body.address,
+      phoneNumber: req.body.phoneNumber,
+      email: req.body.email,
+      website: req.body.website,
+      linkedIn: req.body.linkedIn,
+      // ml request datas
+      location: req.body.location,
+      company_industry: req.body.company_industry,
+      carrer_level: req.body.career_level,
+      experience_level: req.body.experience_level,
+      education_level: req.body.education_level,
+      employment_type: req.body.employment_type,
+      job_function: req.body.job_function,
+    };
 
-    res.redirect(`/job/get-job-id/${id}`);
+    // apply datas to db
+    const jobDoc = doc(actualDb, 'jobs', id);
+    await setDoc(jobDoc, { data, createdAt: currentDateTime });
     console.log(`${currentDateTime} with id: ${id} record saved`);
   } catch (error) {
     res.status(400).send(error.message);
@@ -81,16 +95,23 @@ const getJobId = async (req, res) => {
         userId: data.userId,
         createdAt: data.createdAt,
         id: jobId,
-        //
+        // job datas
         jobTitle: data.jobTitle,
         description: data.description,
-        qualifications: data.qualifications, // dont need this
         companyName: data.companyName,
-        address: data.address, // https://randomuser.me/
-        phoneNumber: data.phoneNumber, // https://randomuser.me/
-        email: data.email, // https://randomuser.me/
+        address: data.address,
+        phoneNumber: data.phoneNumber,
+        email: data.email,
         website: data.website,
         linkedIn: data.linkedIn,
+        // ml datas
+        location: data.location,
+        company_industry: data.company_industry,
+        carrer_level: data.career_level,
+        experience_level: data.experience_level,
+        education_level: data.education_level,
+        employment_type: data.employment_type,
+        job_function: data.job_function,
       };
       res.send(jobWithId);
     }
@@ -105,7 +126,8 @@ const getAllJobOfOneUser = async (req, res) => {
     const allJobCollection = collection(actualDb, 'jobs');
     const allJobOfOneUserQuery = query(
       allJobCollection,
-      where('userId', '==', userId)
+      where('userId', '==', userId),
+      limit(100)
     );
     const allJobOfOneUserSnapshot = await getDocs(allJobOfOneUserQuery);
 
@@ -116,15 +138,23 @@ const getAllJobOfOneUser = async (req, res) => {
         userId: data.userId,
         createdAt: data.createdAt,
         id: doc.id,
+        // job datas
         jobTitle: data.jobTitle,
         description: data.description,
-        qualifications: data.qualifications,
         companyName: data.companyName,
         address: data.address,
         phoneNumber: data.phoneNumber,
         email: data.email,
         website: data.website,
         linkedIn: data.linkedIn,
+        // ml datas
+        location: data.location,
+        company_industry: data.company_industry,
+        carrer_level: data.career_level,
+        experience_level: data.experience_level,
+        education_level: data.education_level,
+        employment_type: data.employment_type,
+        job_function: data.job_function,
       };
       responseArr.push(responseObject);
     });
@@ -195,7 +225,7 @@ const deleteAllJobOfOneUser = async (req, res) => {
 };
 
 module.exports = {
-  outputsML,
+  addDummyJob,
   addJob,
   getJobId,
   getAllJobOfOneUser,
