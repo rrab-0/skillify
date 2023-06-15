@@ -60,20 +60,17 @@ const postToML = async (data) => {
     headers: {
       'Content-Type': 'application/json',
     },
-    body: data,
+    body: JSON.stringify(data), // Convert data to JSON string
   };
-  console.log(data);
 
-  //
   try {
     const response = await fetch(
       'https://skillify-ml-webservice-boq7zjhvoq-et.a.run.app/predict',
       postToMLdatas
     );
-    const data = await response.json();
-    return data;
+    const dataRes = await response.json();
+    return dataRes;
   } catch (error) {
-    // res.status(400).send(`ml endpoint error : ${error.message}`);
     console.log(error);
   }
 };
@@ -82,14 +79,14 @@ const postToML = async (data) => {
 const getJobPreference = async (req, res) => {
   try {
     const data = req.body;
-    const newData = postToML(data);
-    //
-    // let emptyArr = [];
-    // data.forEach(async (datas) => {
-    //   console.log(datas.id);
-    //   //
-    //   // emptyArr.push(actualData); == where datas.id == id
-    // });
+    const newData = await postToML(data);
+    const jobIds = newData.map(datas => datas.id.toString());
+    console.log(jobIds);
+
+    const jobsQuery = query(collection(actualDb, 'jobs'), where('id', 'in', jobIds)); 
+    const querySnapshot = await getDocs(jobsQuery);
+    const jobs = querySnapshot.docs.map(doc => doc.data());
+    res.status(200).json(jobs);
   } catch (error) {
     res.status(400).send(error.message);
   }
