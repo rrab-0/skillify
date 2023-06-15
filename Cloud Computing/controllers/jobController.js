@@ -62,12 +62,16 @@ const postToML = async (data) => {
     },
     body: data,
   };
+  console.log(data);
 
   //
   try {
-    const response = await fetch('/predict', postToMLdatas);
+    const response = await fetch(
+      'https://skillify-ml-webservice-boq7zjhvoq-et.a.run.app/predict',
+      postToMLdatas
+    );
     const data = await response.json();
-    console.log(data);
+    return data;
   } catch (error) {
     // res.status(400).send(`ml endpoint error : ${error.message}`);
     console.log(error);
@@ -78,7 +82,14 @@ const postToML = async (data) => {
 const getJobPreference = async (req, res) => {
   try {
     const data = req.body;
-    res.send(postToML(data));
+    const newData = postToML(data);
+    //
+    // let emptyArr = [];
+    // data.forEach(async (datas) => {
+    //   console.log(datas.id);
+    //   //
+    //   // emptyArr.push(actualData); == where datas.id == id
+    // });
   } catch (error) {
     res.status(400).send(error.message);
   }
