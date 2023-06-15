@@ -10,3 +10,6 @@ https://www.figma.com/file/z4q4cuZswUejdSDcZwSoNc/Project-Skillify?type=design&n
 
 Prototype :
 https://www.figma.com/proto/z4q4cuZswUejdSDcZwSoNc/Project-Skillify?page-id=4%3A25&type=design&node-id=49-3&viewport=426%2C195%2C0.27&scaling=scale-down&starting-point-node-id=49%3A3
+
+APK file :
+https://drive.google.com/drive/folders/1_sWp-__JgWyCmMvnXqvFeki2i3aLvF7y?usp=sharing
