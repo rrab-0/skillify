@@ -2,7 +2,7 @@
 
 `C23-PR506 - Bangkit Academy's 2023 Product Capstone Project`
 
-Skillify is aTinder-like android application for recruiters and job seekers with a machine learning recommendation system.
+Skillify is an android application for recruiters and job seekers with a machine learning recommendation system.
 
 ## Team Member:
 
@@ -27,12 +27,10 @@ Please refer to the respective sub-project directories for more information on e
 
 - Platform:
   - Android Developers
-  - Google Cloud
-  - Compute Engine
-  - CloudSQL
+  - Google Cloud Platform
+  - Google Cloud Run
+  - Firestore
   - Cloud Storage
-  - Firebase with Google cloud
-  - VertexAI
 - IDE:
   - Android Studio
   - Visual Studio Code
@@ -41,14 +39,15 @@ Please refer to the respective sub-project directories for more information on e
   - Android Jetpack
   - Node.js
   - Express.js
-  - Auth0
+  - JsonWebToken
+  - Multer
   - TensorFlow
   - Pandas
   - NumPy
   - Surprise
 - Database:
-  - MySQL
-  - Firebase
+  - Firestore
+  - Cloud Storage
   - SQLite
 - Tools:
   - Postman
