@@ -6,7 +6,7 @@
 
 ## Tech Stack
 - **Back-End**: Express.js
-- **Database**: Firestore + Cloud Storage
+- **Database**: Firestore + Firebase's Cloud Storage
 - **Deployment**: Google Cloud Run
 
 ## Back-End Depedency
@@ -26,6 +26,20 @@ Pertama, install seluruh depedency yang digunakan terlebih dahulu menggunakan `n
 ### `npm run start`
 
 Setelah dependency berhasil diinstall, gunakan command `npm run start` untuk memulai program. Server akan berjalan di `localhost:8080`.
+
+## How to deploy to cloud run
+
+### `git clone https://github.com/rrab-0/skillify.git`
+
+Clone our application's repository
+
+### `cd skillify/Cloud\ Computing/`
+
+Change to "Cloud Computing" directory
+
+### `gcloud run deploy`
+
+After this process is completed, you will get the URL.
 
 ## File Structure
 
