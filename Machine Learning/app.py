@@ -1,9 +1,11 @@
+# import library
 from flask import Flask, request, jsonify
 import os
 import tensorflow as tf
 import pandas as pd
 import numpy as np
 
+# initialize flask
 app = Flask(__name__)
 
 # {
@@ -16,14 +18,15 @@ app = Flask(__name__)
 #     "company_industry": "Manufaktur/Produksi"
 # }
 
+# initialize /predict route with method=POST
 @app.route('/predict', methods=['POST'])
 def predict():
-    # LOAD MODEl
+    # load model
     model = tf.keras.models.load_model('model/saved_model.h5')
 
-    # GET REQUEST INPUT
+    # get request input
     data = request.json
-    # PREPROCESSING DATA
+    # preproccessing data
     df = pd.DataFrame(index=[0])
     locations = [
       'Aceh', 'Ambon', 'Asahan Kisaran', 'Badung', 'Balangan', 'Bali', 'Balikpapan', 'Bandar Lampung', 'Bandung',
@@ -51,7 +54,7 @@ def predict():
       'Tabalong', 'Tanah Bumbu', 'Tanah Laut', 'Tangerang', 'Tanjung Balai', 'Tanjung Pinang', 'Tapanuli', 'Tarakan',
       'Tasikmalaya', 'Tegal', 'Ternate', 'Timika', 'Tuban', 'Ubud', 'Ungaran', 'Wonogiri', 'Yogyakarta'
     ]
-    # Create a dictionary to map locations to encoded values
+    # create a dictionary to map locations to encoded values
     location_encoding = {location: i for i, location in enumerate(locations)}
     df["location"] = location_encoding[data['location']]
 
@@ -61,7 +64,7 @@ def predict():
       'Lulusan baru/Pengalaman kerja kurang dari 1 tahun',
       'CEO/GM/Direktur/Manajer Senior'
     ]
-    # Create a dictionary to map career_levels to encoded values
+    # create a dictionary to map career_levels to encoded values
     career_level_encoding = {career_level: i for i, career_level in enumerate(career_levels)}
     df["career_level"] = career_level_encoding[data['career_level']]
 
@@ -71,7 +74,7 @@ def predict():
       '12 tahun', '14 tahun', '18 tahun', '20 tahun',
       'Lebih dari 20 Tahun', '11 tahun', '16 tahun', '17 tahun', '13 tahun'
     ]
-    # Create a dictionary to map experience_levels to encoded values
+    # create a dictionary to map experience_levels to encoded values
     experience_level_encoding = {experience_level: i for i, experience_level in enumerate(experience_levels)}
     df["experience_level"] = experience_level_encoding[data['experience_level']]
 
@@ -92,14 +95,14 @@ def predict():
       'Properti/Real Estate', 'R&D', 'Retail/Merchandise', 'Seni/Desain/Fashion', 'Tekstil/Garment', 'Telekomunikasi', 
       'Tembakau', 'Transportasi/Logistik', 'Travel/Pariwisata', 'Umum & Grosir'
     ]
-    # Create a dictionary to company_industries to encoded values
+    # create a dictionary to company_industries to encoded values
     company_industry_encoding = {company_industry: i for i, company_industry in enumerate(company_industries)}
     df["company_industry"] = company_industry_encoding[data['company_industry']]
 
     employment_types = [
         'Kontrak',	'Paruh Waktu',	'Penuh Waktu',	'Temporer'
     ]
-    # Perform one-hot encoding
+    # perform one-hot encoding
     encoded_employment_types = [1 if level in data['employment_type'] else 0 for level in employment_types]
     for level, encoded_value in zip(employment_types, encoded_employment_types):
         df[level] = encoded_value
@@ -108,7 +111,7 @@ def predict():
         'D3 (Diploma)', 'D4 (Diploma)', 'Diploma Pascasarjana', 'Doktor (S3)', 'Gelar Professional', 'Magister (S2)', 'SMA',
         'SMU/SMK/STM', 'Sarjana (S1)', 'Sertifikat Professional', 'Tidak terspesifikasi'
     ]
-    # Perform one-hot encoding
+    # perform one-hot encoding
     encoded_education = [1 if level in data['education_level'] else 0 for level in education_levels]
     for level, encoded_value in zip(education_levels, encoded_education):
         df[level] = encoded_value
@@ -131,12 +134,12 @@ def predict():
         'Teknik Elektronika', 'Teknik Industri', 'Teknik Kimia', 'Teknik Lainnya', 'Teknik Lingkungan', 'Teknik Sipil/Konstruksi Bangunan',
         'Teknikal & Bantuan Pelanggan', 'Teknologi Makanan/Ahli Gizi', 'Telesales/Telemarketing', 'Top Management / Manajemen Tingkat Atas'
     ]
-    # Perform one-hot encoding
+    # perform one-hot encoding
     encoded_job_function = [1 if level in data['job_function'] else 0 for level in job_functions]
     for level, encoded_value in zip(job_functions, encoded_job_function):
         df[level] = encoded_value
 
-    # SCALLING
+    # feature scalling
     MAX_LOCATION = 193
     MAX_CAREER_LEVEL = 4
     MAX_EXPERIENCE_LEVEL = 19
@@ -147,7 +150,7 @@ def predict():
     df['experience_level'] = df['experience_level'] / MAX_EXPERIENCE_LEVEL
     df['company_industry'] = df['company_industry'] / MAX_COMPANY_INDUSTRY
 
-    # PREDICTION
+    # make a prediction
     data = pd.read_csv("dataset/data_cleaned.csv")
 
     NUM_PREDICTION = 10
@@ -157,14 +160,16 @@ def predict():
 
     matched_rows = data[data['id'].isin(recommended_jobs.tolist())]
 
-    # RETURN PREDICTION
+    # return prediction
     response = matched_rows.to_json(orient='records')
     return response
 
+# initialize index route
 @app.route("/")
 def hello_world():
     return "<p>service is up and running.</p>"
 
+# run flask app
 if __name__ == '__main__':
     # app.run(debug=True)
     # app.run(host="0.0.0.0", port=8080)
