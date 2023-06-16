@@ -22,8 +22,8 @@ To get started with Skillify, please follow the instructions in each sub-project
 The project is divided into three sub-projects:
 
 1. [Machine Learning: Job Recommender System using Tensorflow Neural Network](/Machine%20Learning/)
-2. [Cloud Computing](/Cloud%20Computing/)
-3. [Mobile Development](/Mobile%20Development/)
+2. [Cloud Computing: Backend developed with Express.js and Firestore + Firebase's Cloud Storage as the database](/Cloud%20Computing/)
+3. [Mobile Development: Frontend developed with Kotlin Native](/Mobile%20Development/)
 
 Please refer to the respective sub-project directories for more information on each sub-project.
 
