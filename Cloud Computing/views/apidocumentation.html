@@ -1,72 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>API Documentation</title>
+    <link rel="stylesheet" type="text/css" href="/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>API Documentation</title>
-  <link rel="stylesheet" type="text/css" href="/style.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+  <body>
+    <div class="title-container">
+      <h1>
+        Skillify API Documentation
+        <a class="github-link" href="https://github.com/rrab-0/skillify"
+          ><svg
+            class="github-icon"
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-github"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"
+            /></svg
+        ></a>
+      </h1>
+      <p>This is the API documentation for C23-PR506's product capstone.</p>
+    </div>
 
-</head>
+    <div class="register-flow-container">
+      <h2>Workflow</h2>
+      <p>
+        All methods need an Authorization header, token can be obtained after
+        user is registered successfully.
+      </p>
+      <p>The typical workflow is as follows:</p>
+      <ol>
+        <li>User registers with /user/register.</li>
+        <li>User obtains token and add a profile photo with /upload.</li>
+        <li>
+          User adds datas with /user/add-user-data/{id}, id is uuid provided in
+          register's response.
+        </li>
+        <li>User can list, update, or delete their user datas here.</li>
+        <li>User adds job datas with /job/add-job.</li>
+        <li>
+          User can list, update, delete a single job, or delete their entire
+          jobs here.
+        </li>
+      </ol>
+    </div>
 
-<body>
-  <div class="title-container">
-    <h1>Skillify API Documentation <a class="github-link" href="https://github.com/rrab-0/skillify"><svg class="github-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-github" viewBox="0 0 16 16">
-      <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
-    </svg></a></h1>
-    <p>
-      This is the API documentation for C23-PR506's product capstone.
-    </p>
-  </div>
-
-  <div class="register-flow-container">
-    <h2>Workflow</h2>
-    <p>All methods need an Authorization header, token can be obtained after user is registered successfully.</p>
-    <p>
-      The typical workflow is as follows:
-    </p>
-    <ol>
-      <li>
-        User registers with /user/register.
-      </li>
-      <li>
-        User obtains token and add a profile photo with /upload.
-      </li>
-      <li>
-        User adds datas with /user/add-user-data/{id}, id is uuid provided in register's response.
-      </li>
-      <li>
-        User can list, update, or delete their user datas here.
-      </li>
-      <li>
-        User adds job datas with /job/add-job.
-      </li>
-      <li>
-        User can list, update, delete a single job, or delete their entire jobs here.
-      </li>
-    </ol>
-  </div>
-
-  <div class="upload-container">
-    <h2>
-      Uploads
-      <span class="title-span">to upload files such as profile photo, CV, company photos, etc.
-        and deleting.</span>
-    </h2>
-    <div class="container">
-      <div class="request-column">
-        <div class="methods-container">
-          <p><span class="methods post-method">POST</span> /upload</p>
-          <p>to upload files used in user/job datas.</p>
+    <div class="upload-container">
+      <h2>
+        Uploads
+        <span class="title-span"
+          >to upload files such as profile photo, CV, company photos, etc. and
+          deleting.</span
+        >
+      </h2>
+      <div class="container">
+        <div class="request-column">
+          <div class="methods-container">
+            <p><span class="methods post-method">POST</span> /upload</p>
+            <p>to upload files used in user/job datas.</p>
+          </div>
         </div>
-      </div>
-      <div class="response-column">
-        <div class="body-container">
-          <h4>Response</h4>
-          <pre><code class="language-json">
+        <div class="response-column">
+          <div class="body-container">
+            <h4>Response</h4>
+            <pre><code class="language-json">
             {
               "message": "file uploaded",
               "name": "cat.png",
@@ -74,83 +84,88 @@
               "downloadURL": "https://firebasestorage.googleapis.com/v0/b/bangkit-product-capstone.appspot.com/o/files%2Fref-1.png%20%20%20%20%20%20%20(9%3A3%3A19%20and%202023-6-8)?alt=media&token=be69817f-e0fa-4f73-9569-f4ab16f3d4ec"
             }
           </code></pre>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="user-container">
-    <h2>
-      User
-      <span class="title-span">to perform operations on user data such as adding, listing, updating,
-        and deleting.</span>
-    </h2>
-    <div class="container">
-      <div class="request-column">
-        <div class="methods-container">
-          <p><span class="methods post-method">POST</span> /user/register</p>
-          <p>to register a user.</p>
-        </div>
-        <div class="body-container">
-          <h4>Request</h4>
-          <pre><code class="language-json">
+    <div class="user-container">
+      <h2>
+        User
+        <span class="title-span"
+          >to perform operations on user data such as adding, listing, updating,
+          and deleting.</span
+        >
+      </h2>
+      <div class="container">
+        <div class="request-column">
+          <div class="methods-container">
+            <p><span class="methods post-method">POST</span> /user/register</p>
+            <p>to register a user.</p>
+          </div>
+          <div class="body-container">
+            <h4>Request</h4>
+            <pre><code class="language-json">
       {
         "username": "username1",
         "password": "password"
       }
             </code></pre>
+          </div>
         </div>
-      </div>
-      <div class="response-column">
-        <div class="body-container">
-          <h4>Response</h4>
-          <pre><code class="language-json">
+        <div class="response-column">
+          <div class="body-container">
+            <h4>Response</h4>
+            <pre><code class="language-json">
       {
         "uuid": "f2a3d0c7-b90a-41f0-b0fb-73c665b4483a",
         "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiZjJhM2QwYzctYjkwYS00MWYwLWIwZmItNzNjNjY1YjQ0ODNhIiwiaWF0IjoxNjg2MjgwMjM4LCJleHAiOjE2ODYyODM4Mzh9.Zv1Epg9M05inOt8Au-xvDn87cj1KD7CMDUQH6wUczMk"
       }
           </code></pre>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="container">
-      <div class="request-column">
-        <div class="methods-container">
-          <p><span class="methods post-method">POST</span> /user/login</p>
-          <p>to login a user.</p>
-        </div>
-        <div class="body-container">
-          <h4>Request</h4>
-          <pre><code class="language-json">
+      <div class="container">
+        <div class="request-column">
+          <div class="methods-container">
+            <p><span class="methods post-method">POST</span> /user/login</p>
+            <p>to login a user.</p>
+          </div>
+          <div class="body-container">
+            <h4>Request</h4>
+            <pre><code class="language-json">
       {
         "username": "username1",
         "password": "password"
       }
             </code></pre>
+          </div>
         </div>
-      </div>
-      <div class="response-column">
-        <div class="body-container">
-          <h4>Response</h4>
-          <pre><code class="language-json">
+        <div class="response-column">
+          <div class="body-container">
+            <h4>Response</h4>
+            <pre><code class="language-json">
       {
         "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiZjJhM2QwYzctYjkwYS00MWYwLWIwZmItNzNjNjY1YjQ0ODNhIiwiaWF0IjoxNjg2MjgwMjM4LCJleHAiOjE2ODYyODM4Mzh9.Zv1Epg9M05inOt8Au-xvDn87cj1KD7CMDUQH6wUczMk"
       }
           </code></pre>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="container">
-      <div class="request-column">
-        <div class="methods-container">
-          <p><span class="methods post-method">POST</span> /user/add-user-data/{id}</p>
-          <p>to add user datas.</p>
-        </div>
-        <div class="body-container">
-          <h4>Request</h4>
-          <pre><code class="language-json">
+      <div class="container">
+        <div class="request-column">
+          <div class="methods-container">
+            <p>
+              <span class="methods post-method">POST</span>
+              /user/add-user-data/{id}
+            </p>
+            <p>to add user datas.</p>
+          </div>
+          <div class="body-container">
+            <h4>Request</h4>
+            <pre><code class="language-json">
       {
         "fullName": "Andre Budiman",
         "age": "20",
@@ -165,12 +180,12 @@
         "linkedIn": "linkedin.com/andre"
       }
           </code></pre>
+          </div>
         </div>
-      </div>
-      <div class="response-column">
-        <div class="body-container">
-          <h4>Response</h4>
-          <pre><code class="language-json">
+        <div class="response-column">
+          <div class="body-container">
+            <h4>Response</h4>
+            <pre><code class="language-json">
       {
         "id": "f2a3d0c7-b90a-41f0-b0fb-73c665b4483a",
         "fullName": "Andre Budiman",
@@ -186,21 +201,24 @@
         "linkedIn": "linkedin.com/andre"
       }
           </code></pre>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="container">
-      <div class="request-column">
-        <div class="methods-container">
-          <p><span class="methods get-method">GET</span> /user/get-user-data-by-id/{id}</p>
-          <p>to list datas of a user.</p>
+      <div class="container">
+        <div class="request-column">
+          <div class="methods-container">
+            <p>
+              <span class="methods get-method">GET</span>
+              /user/get-user-data-by-id/{id}
+            </p>
+            <p>to list datas of a user.</p>
+          </div>
         </div>
-      </div>
-      <div class="response-column">
-        <div class="body-container">
-          <h4>Response</h4>
-          <pre><code class="language-json">
+        <div class="response-column">
+          <div class="body-container">
+            <h4>Response</h4>
+            <pre><code class="language-json">
       {
         "id": "f2a3d0c7-b90a-41f0-b0fb-73c665b4483a",
         "fullName": "Andre Budiman",
@@ -216,21 +234,23 @@
         "linkedIn": "linkedin.com/andre"
       }
         </code></pre>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="container">
-      <div class="request-column">
-        <div class="methods-container">
-          <p><span class="methods get-method">GET</span> /user/get-all-user</p>
-          <p>to list all users registered.</p>
+      <div class="container">
+        <div class="request-column">
+          <div class="methods-container">
+            <p>
+              <span class="methods get-method">GET</span> /user/get-all-user
+            </p>
+            <p>to list all users registered.</p>
+          </div>
         </div>
-      </div>
-      <div class="response-column">
-        <div class="body-container">
-          <h4>Response</h4>
-          <pre><code class="language-json">
+        <div class="response-column">
+          <div class="body-container">
+            <h4>Response</h4>
+            <pre><code class="language-json">
       [
         {
           "id": "e8175a69-15ff-459d-b847-ce65c236db3f",
@@ -274,68 +294,194 @@
         }
       ]
           </code></pre>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="container">
-      <div class="request-column">
-        <div class="methods-container">
-          <p><span class="methods patch-method">PATCH</span> /user/update-user/{id}</p>
-          <p>to update user's data.</p>
-        </div>
-        <div class="body-container">
-          <h4>Request</h4>
-          <pre><code class="language-json">
+      <div class="container">
+        <div class="request-column">
+          <div class="methods-container">
+            <p>
+              <span class="methods patch-method">PATCH</span>
+              /user/update-user/{id}
+            </p>
+            <p>to update user's data.</p>
+          </div>
+          <div class="body-container">
+            <h4>Request</h4>
+            <pre><code class="language-json">
       {
         "fullName": "Andreas Gonzalez"
       }
           </code></pre>
+          </div>
         </div>
-      </div>
-      <div class="response-column">
-        <div class="body-container">
-          <h4>Response</h4>
-          <pre><code class="language-json">
+        <div class="response-column">
+          <div class="body-container">
+            <h4>Response</h4>
+            <pre><code class="language-json">
       User updated successfully
             </code></pre>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="container">
-      <div class="request-column">
-        <div class="methods-container">
-          <p><span class="methods delete-method">DELETE</span> /user/delete-user/{id}</p>
-          <p>to delete user's data.</p>
+      <div class="container">
+        <div class="request-column">
+          <div class="methods-container">
+            <p>
+              <span class="methods delete-method">DELETE</span>
+              /user/delete-user/{id}
+            </p>
+            <p>to delete user's data.</p>
+          </div>
         </div>
-      </div>
-      <div class="response-column">
-        <div class="body-container">
-          <h4>Response</h4>
-          <pre><code class="language-json">
+        <div class="response-column">
+          <div class="body-container">
+            <h4>Response</h4>
+            <pre><code class="language-json">
       User deleted successfully
             </code></pre>
+          </div>
         </div>
       </div>
-    </div>
-  
-  <div class="job-container">
-    <h2>
-      Job
-      <span class="title-span">to perform operations on jobs a user posted such as adding, listing,
-        updating, and deleting.</span>
-    </h2>
 
-    <div class="container">
-      <div class="request-column">
-        <div class="methods-container">
-          <p><span class="methods post-method">POST</span> /job/add-job</p>
-          <p>to add jobs for a user.</p>
+      <div class="job-container">
+        <h2>
+          Job
+          <span class="title-span"
+            >to perform operations on jobs a user posted such as adding,
+            listing, updating, and deleting.</span
+          >
+        </h2>
+
+        <div class="container">
+          <div class="request-column">
+            <div class="methods-container">
+              <p>
+                <span class="methods post-method">POST</span>
+                /job/add-dummy-jobs
+              </p>
+              <p>
+                this is a utility endpoint, was used to put dummy datas + ML
+                data into our database, we need the dummy datas to match the
+                result from our recommendation system with our database. If we
+                don't have dummy datas, we don't have anything to match with.
+              </p>
+            </div>
+            <div class="body-container">
+              <h4>
+                Request
+                <span class="job-preferences-span"
+                  >the request was from a CSV that the ML team gave to us, we
+                  then convert that CSV into a json file</span
+                >
+              </h4>
+              <pre><code class="language-json">
+      {
+        "userId": "e082faa8-ef7f-4f07-910d-b87d6a2c6b92",
+        "jobTitle": "Procurement Department Head",
+        "description": "Job Role  1. Responsible for material availability for production heavy equipment and supporting equipment to ensure supportto operational needs, with proper specification, budget, quantity and time required.2. Ensure complete database of suppliers/vendors/subcontractors, contract management, material delivery, scrapreselling activities from Jobsite accordingly to plan and procedure.3. Ensuring subcontractor requirements for heavy equipment/units in Production, Engineering   PlantRequirement s Education S1 Mechanical Engineering / Industrial Engineering / EconomicsWork Experience s  5 Years in the same position, preferably from mining servicesIndustry Preference  Mining ServicesTechnical Skill  Heavy Equipment Knowledge, Negotiation Skill, Contract ManagementGood command in English is a must",
+        "companyName": "PD Siregar Tbk",
+        "address": "Jalan Siliwangi No. 61",
+        "phoneNumber": "+62 (032) 479-7215",
+        "email": "pdsiregartbk@email.com",
+        "website": "www.pd-siregar-tbk.com",
+        "linkedin": "www.linkedin.com/in/pd-siregar-tbk/",
+        "id": "1",
+        "location": "Jakarta Raya",
+        "career_level": "Manajer/Asisten Manajer",
+        "experience_level": "5 tahun",
+        "education_level": "Sarjana (S1),Diploma Pascasarjana,Gelar Professional,Magister (S2)",
+        "employment_type": "Penuh Waktu",
+        "job_function": "Manufaktur,Pembelian/Manajemen Material",
+        "company_industry": "Manajemen/Konsulting HR"
+      },
+          </code></pre>
+            </div>
+          </div>
+          <div class="response-column">
+            <div class="body-container">
+              <h4>Response ></h4>
+              <pre><code class="language-json">
+      jobs saved
+          </code></pre>
+            </div>
+          </div>
         </div>
-        <div class="body-container">
-          <h4>Request</h4>
-          <pre><code class="language-json">
+
+        <div class="container">
+          <div class="request-column">
+            <div class="methods-container">
+              <p>
+                <span class="methods post-method">POST</span>
+                /job/get-job-preferences
+              </p>
+              <p>
+                to get recommended jobs from the "/predict" endpoint in our
+                Machine Learning web service
+                (https://skillify-ml-webservice-boq7zjhvoq-et.a.run.app/predict).
+              </p>
+            </div>
+            <div class="body-container">
+              <h4>Request</h4>
+              <pre><code class="language-json">
+      {
+        "location": "Bandung",
+        "career_level": "Lulusan baru/Pengalaman kerja kurang dari 1 tahun",
+        "experience_level": "1 tahun",
+        "education_level": "Sarjana (S1)",
+        "employment_type": "Penuh Waktu",
+        "job_function": "IT-Perangkat Keras",
+        "company_industry": "Ilmu Pengetahuan & Teknologi"
+      }
+          </code></pre>
+            </div>
+          </div>
+          <div class="response-column">
+            <div class="body-container">
+              <h4>
+                Response
+                <span class="job-preferences-span"
+                  >below is only one example, the actual response have hundreds
+                  of JSON data, we limit it into 100 responses only in our
+                  backend.</span
+                >
+              </h4>
+              <pre><code class="language-json">
+      {
+        "userId": "e082faa8-ef7f-4f07-910d-b87d6a2c6b92",
+        "createdAt": "2023-6-15 11:27:57",
+        "id": "11244",
+        "jobTitle": "SPECIFIER",
+        "description": "Deskripsi Pekerjan  Memperkenalkan dan Mengimplementasikan Pengetahuan Product kepada Architect, Consultant, Kontraktor, owner/developer dan melakukan kerja sama spesifikasi produkMempromosikan dan melakukan survei terhadap Project yang memiliki Peluang terhadap ProductBertanggung Jawab terhadap pertumbuhan ProductMembina hubungan dengan customerMemetakan kebutuhan sesuai keinginan customerMembuat laporan pemasaran untuk diserahkan kepada Sales Marketing ManagerSyarat Calon Pelamar  Memiliki pengetahuan mengenai material konstruksiPengalaman dalam bidang material konstruksiNilai plus bagi yang memiliki Pengalaman dalam memasarkan produk Waterproofing, Precast system, Pembuatan Kolam Renang, maintenance Kolam renang/Water treatmentMemiliki jaringan/relasi dengan Arsitek, Konsultan, Kontraktor dan Developer/OwnerDapat bekerja dalam individu maupun teamPandai berkomunikasi dan mampu mengatasi costumer complainMemiliki knowledge yang baik mengenai material industri bangunanJujur, Bertanggung Jawab, Disiplin   KomunikatifMemiliki kendaraan pribadiSMA / SMK Teknik Arsitektur / konstruksiD3 Teknik Sipil   Arsitektur / InteriorS1 Pendidikan Teknik Arsitektur / Interior",
+        "companyName": "CV Budiyanto Maryati Tbk",
+        "address": "Gg. Moch. Ramdan No. 427",
+        "phoneNumber": "+62 (0122) 558 9143",
+        "email": "cvbudiyantomaryatitbk@email.com",
+        "website": "www.cv-budiyanto-maryati-tbk.com",
+        "location": "Depok",
+        "company_industry": "Manufaktur/Produksi",
+        "carrer_level": "Pegawai (non-manajemen & non-supervisor)",
+        "experience_level": "2 tahun",
+        "education_level": "Tidak terspesifikasi",
+        "employment_type": "Penuh Waktu",
+        "job_function": "Bangunan/Konstruksi,Teknik Sipil/Konstruksi Bangunan"
+      },
+          </code></pre>
+            </div>
+          </div>
+        </div>
+
+        <div class="container">
+          <div class="request-column">
+            <div class="methods-container">
+              <p><span class="methods post-method">POST</span> /job/add-job</p>
+              <p>to add jobs for a user.</p>
+            </div>
+            <div class="body-container">
+              <h4>Request</h4>
+              <pre><code class="language-json">
       {
         "userId": "f2a3d0c7-b90a-41f0-b0fb-73c665b4483a",
         "jobTitle": "IT engineer",
@@ -349,12 +495,12 @@
         "linkedIn": "linkedin.com/abc"
       }
           </code></pre>
-        </div>
-      </div>
-      <div class="response-column">
-        <div class="body-container">
-          <h4>Response</h4>
-          <pre><code class="language-json">
+            </div>
+          </div>
+          <div class="response-column">
+            <div class="body-container">
+              <h4>Response</h4>
+              <pre><code class="language-json">
       {
         "userId": "f2a3d0c7-b90a-41f0-b0fb-73c665b4483a",
         "createdAt": "2023-6-9 11:22:38",
@@ -370,21 +516,23 @@
         "linkedIn": "linkedin.com/abc"
       }
           </code></pre>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
 
-    <div class="container">
-      <div class="request-column">
-        <div class="methods-container">
-          <p><span class="methods get-method">GET</span> /job/get-job-id/{id}</p>
-          <p>to list datas of a job from a user.</p>
-        </div>
-      </div>
-      <div class="response-column">
-        <div class="body-container">
-          <h4>Response</h4>
-          <pre><code class="language-json">
+        <div class="container">
+          <div class="request-column">
+            <div class="methods-container">
+              <p>
+                <span class="methods get-method">GET</span> /job/get-job-id/{id}
+              </p>
+              <p>to list datas of a job from a user.</p>
+            </div>
+          </div>
+          <div class="response-column">
+            <div class="body-container">
+              <h4>Response</h4>
+              <pre><code class="language-json">
       {
         "userId": "f2a3d0c7-b90a-41f0-b0fb-73c665b4483a",
         "createdAt": "2023-6-9 11:22:38",
@@ -400,21 +548,24 @@
         "linkedIn": "linkedin.com/abc"
       }
           </code></pre>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
 
-    <div class="container">
-      <div class="request-column">
-        <div class="methods-container">
-          <p><span class="methods get-method">GET</span> /job/get-all-jobs-for-a-user?userId={userId}</p>
-          <p>to list all posted jobs of a user.</p>
-        </div>
-      </div>
-      <div class="response-column">
-        <div class="body-container">
-          <h4>Response</h4>
-          <pre><code class="language-json">
+        <div class="container">
+          <div class="request-column">
+            <div class="methods-container">
+              <p>
+                <span class="methods get-method">GET</span>
+                /job/get-all-jobs-for-a-user?userId={userId}
+              </p>
+              <p>to list all posted jobs of a user.</p>
+            </div>
+          </div>
+          <div class="response-column">
+            <div class="body-container">
+              <h4>Response</h4>
+              <pre><code class="language-json">
       [
         {
             "userId": "f2a3d0c7-b90a-41f0-b0fb-73c665b4483a",
@@ -446,74 +597,83 @@
         }
       ]
           </code></pre>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
 
-    <div class="container">
-      <div class="request-column">
-        <div class="methods-container">
-          <p><span class="methods patch-method">PATCH</span> /job/update-job/{id}</p>
-          <p>to update datas of a job from a user.</p>
-        </div>
-        <div class="body-container">
-          <h4>Request</h4>
-          <pre><code class="language-json">
+        <div class="container">
+          <div class="request-column">
+            <div class="methods-container">
+              <p>
+                <span class="methods patch-method">PATCH</span>
+                /job/update-job/{id}
+              </p>
+              <p>to update datas of a job from a user.</p>
+            </div>
+            <div class="body-container">
+              <h4>Request</h4>
+              <pre><code class="language-json">
       {
         "qualifications": "Mahir CSS dan JS"
       }
           </code></pre>
-        </div>
-      </div>
-      <div class="response-column">
-        <div class="body-container">
-          <h4>Response</h4>
-          <pre><code class="language-json">
+            </div>
+          </div>
+          <div class="response-column">
+            <div class="body-container">
+              <h4>Response</h4>
+              <pre><code class="language-json">
       Job updated successfully
           </code></pre>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
 
-    <div class="container">
-      <div class="request-column">
-        <div class="methods-container">
-          <p><span class="methods delete-method">DELETE</span> /jobs/delete-job/{id}</p>
-          <p>to delete a job from.</p>
-        </div>
-      </div>
-      <div class="response-column">
-        <div class="body-container">
-          <h4>Response</h4>
-          <pre><code class="language-json">
+        <div class="container">
+          <div class="request-column">
+            <div class="methods-container">
+              <p>
+                <span class="methods delete-method">DELETE</span>
+                /jobs/delete-job/{id}
+              </p>
+              <p>to delete a job from.</p>
+            </div>
+          </div>
+          <div class="response-column">
+            <div class="body-container">
+              <h4>Response</h4>
+              <pre><code class="language-json">
       Job deleted successfully
           </code></pre>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
 
-    <div class="container">
-      <div class="request-column">
-        <div class="methods-container">
-          <p><span class="methods delete-method">DELETE</span> /job/delete-all-jobs-for-a-user?userId={userId}</p>
-          <p>to delete all jobs associated with a user.</p>
-        </div>
-      </div>
-      <div class="response-column">
-        <div class="body-container">
-          <h4>Response</h4>
-          <pre><code class="language-json">
+        <div class="container">
+          <div class="request-column">
+            <div class="methods-container">
+              <p>
+                <span class="methods delete-method">DELETE</span>
+                /job/delete-all-jobs-for-a-user?userId={userId}
+              </p>
+              <p>to delete all jobs associated with a user.</p>
+            </div>
+          </div>
+          <div class="response-column">
+            <div class="body-container">
+              <h4>Response</h4>
+              <pre><code class="language-json">
       Jobs deleted successfully
           </code></pre>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</body>
-<script>
-  document.addEventListener('DOMContentLoaded', (event) => {
-    hljs.highlightAll();
-  });
-</script>
-
+  </body>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      hljs.highlightAll();
+    });
+  </script>
 </html>
