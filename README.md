@@ -13,7 +13,11 @@ Skillify is an android application for recruiters and job seekers with a machine
 - (CC) C038DSX0683 – Iqbal Muchlis – Institut Teknologi Sepuluh Nopember
 - (MD) A150DSX2100 – Rohim Kurniawan – Universitas Bina Sarana Informatika
 
-## Sub-Projects
+## Getting Started
+
+To get started with Skillify, please follow the instructions in each sub-project directory to set up and run the respective components.
+
+#### Sub-Projects
 
 The project is divided into three sub-projects:
 
@@ -29,29 +33,29 @@ Please refer to the respective sub-project directories for more information on e
   - Android Developers
   - Google Cloud Platform
   - Google Cloud Run
-  - Firestore
-  - Cloud Storage
+  - Firebase:
+    - Firestore
+    - Cloud Storage
 - IDE:
   - Android Studio
   - Visual Studio Code
   - Google Colab
-- Library:
-  - Android Jetpack
-  - Node.js
-  - Express.js
-  - JsonWebToken
-  - Multer
-  - TensorFlow
-  - Pandas
-  - NumPy
-  - Surprise
+- Libraries:
+  - Mobile Development:
+    - Android Jetpack
+  - Machine Learning:
+    - TensorFlow
+    - Pandas
+    - NumPy
+    - Surprise
+  - Cloud Computing:
+    - Node.js
+    - Express.js
+    - JsonWebToken
+    - Multer
 - Database:
   - Firestore
-  - Cloud Storage
+  - Firebase's Cloud Storage
   - SQLite
 - Tools:
   - Postman
-
-## Getting Started
-
-To get started with Skillify, please follow the instructions in each sub-project directory to set up and run the respective components.
