@@ -66,8 +66,11 @@ The machine learning model behind the Job Recommender System is trained using a 
 The performance of the model is evaluated using the `categorical_crossentropy` loss since the model predicts multiple classes. The model is trained for 10 epochs, and the loss shows a significant decrease over the training process.
 
 - Epoch History
+
   ![history_epoch](/Machine%20Learning/image/history_epoch.png)
+
 - Training Loss History
+
   ![history_training_loss](/Machine%20Learning/image/history_training_loss.png)
 
 ## Results
@@ -95,6 +98,7 @@ We can observe that the recommended job listings align with the user's preferenc
 ## Deployment
 
 To deploy the machine learning model, we utilize Flask to easily handle user input processing using Python. We collaborate with our cloud computing team to deploy the model on the cloud. The DataFrame output is converted to JSON format. Here is an example of calling the API using Postman:
+
 ![api_call_postman](/Machine%20Learning/image/api_call_postman.png)
 
 ### How to deploy to cloud run
