@@ -33,6 +33,7 @@ const giveCurrentDateTime = () => {
 const registerUser = async (req, res) => {
   try {
     const { username, password } = req.body;
+    const currentDateTime = giveCurrentDateTime();
 
     // query to firebase
     const usernameQuery = query(
@@ -48,7 +49,7 @@ const registerUser = async (req, res) => {
     const uuid = uuidv4();
     const userDocRef = doc(actualDb, 'registeredUsers', uuid);
     await setDoc(userDocRef, {
-      createdAt: giveCurrentDateTime(),
+      createdAt: currentDateTime,
       username: username,
       password: hashedPassword,
     });

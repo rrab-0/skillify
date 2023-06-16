@@ -2,7 +2,8 @@ const express = require('express');
 const router = express.Router();
 
 const {
-  outputsML,
+  getJobPreference,
+  addDummyJob,
   addJob,
   getJobId,
   getAllJobOfOneUser,
@@ -13,7 +14,8 @@ const {
 
 const { authenticateToken } = require('../controllers/userController');
 
-router.post('/ml', authenticateToken, outputsML);
+router.post('/get-job-preferences', authenticateToken, getJobPreference);
+router.post('/add-dummy-jobs', authenticateToken, addDummyJob);
 router.post('/add-job', authenticateToken, addJob);
 router.get('/get-job-id/:id', authenticateToken, getJobId);
 router.get('/get-all-jobs-for-a-user', authenticateToken, getAllJobOfOneUser);
