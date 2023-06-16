@@ -1,3 +1,4 @@
+// setup
 'use strict';
 
 const db = require('../db');
@@ -20,6 +21,7 @@ const actualDb = getFirestore(db);
 // uuid
 const { v4: uuidv4 } = require('uuid');
 
+// function to embbed timestamp if needed
 const giveCurrentDateTime = () => {
   const today = new Date();
   const date =
@@ -30,6 +32,9 @@ const giveCurrentDateTime = () => {
   return dateTime;
 };
 
+// registers user into firestore,
+// response is token so user is authenticated to do CRUD in firestore,
+// token expires in 1h
 const registerUser = async (req, res) => {
   try {
     const { username, password } = req.body;
@@ -60,6 +65,8 @@ const registerUser = async (req, res) => {
   }
 };
 
+// logins user to firestore to do CRUD operations,
+// response is token, token expires in 1h
 const loginUser = async (req, res) => {
   try {
     const { username, password } = req.body;
@@ -92,6 +99,7 @@ const loginUser = async (req, res) => {
   }
 };
 
+// function to authenticate the tokens
 const authenticateToken = (req, res, next) => {
   const token = req.headers.authorization;
 
@@ -108,6 +116,8 @@ const authenticateToken = (req, res, next) => {
   });
 };
 
+// after registering, user can add their datas here,
+// ex: adding profile datas
 const addUserData = async (req, res) => {
   try {
     const userId = req.params.id;
@@ -122,6 +132,7 @@ const addUserData = async (req, res) => {
   }
 };
 
+// returns the "profile" datas made from addUserData function
 const getUserDataById = async (req, res) => {
   try {
     const userId = req.params.id;
@@ -153,6 +164,7 @@ const getUserDataById = async (req, res) => {
   }
 };
 
+// returns every users "profile" datas in firestore
 const getAllUsersData = async (req, res) => {
   try {
     const allUserDoc = collection(actualDb, 'users');
@@ -183,6 +195,7 @@ const getAllUsersData = async (req, res) => {
   }
 };
 
+// updates user "profile" datas
 const updateUser = async (req, res) => {
   try {
     const userId = req.params.id;
@@ -201,6 +214,7 @@ const updateUser = async (req, res) => {
   }
 };
 
+// to delete a user
 const deleteUser = async (req, res) => {
   try {
     const userId = req.params.id;

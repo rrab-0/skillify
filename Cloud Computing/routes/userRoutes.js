@@ -1,3 +1,4 @@
+// setup
 const express = require('express');
 const router = express.Router();
 
@@ -12,6 +13,7 @@ const {
   authenticateToken,
 } = require('../controllers/userController');
 
+// routes available for user
 router.post('/register', registerUser);
 router.post('/login', loginUser);
 router.post('/add-user-data/:id', authenticateToken, addUserData);

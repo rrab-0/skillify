@@ -1,3 +1,4 @@
+// setup
 'use strict';
 
 // cloud storage firebase
@@ -10,6 +11,9 @@ const {
 
 const storage = getStorage();
 
+// uploads file to firebase's cloud storage bucket,
+// returns the file's name, its mimetype, and
+// the url to view/download the photo
 const uploadFile = async (req, res) => {
   try {
     const dateTime = giveCurrentDateTime();
@@ -47,6 +51,7 @@ const uploadFile = async (req, res) => {
   }
 };
 
+// to add timestamp for every file uploaded
 const giveCurrentDateTime = () => {
   const today = new Date();
   const date =

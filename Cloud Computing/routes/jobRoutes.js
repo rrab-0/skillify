@@ -1,3 +1,4 @@
+// setup
 const express = require('express');
 const router = express.Router();
 
@@ -14,6 +15,7 @@ const {
 
 const { authenticateToken } = require('../controllers/userController');
 
+// routes available to work with "jobs"
 router.post('/get-job-preferences', authenticateToken, getJobPreference);
 router.post('/add-dummy-jobs', authenticateToken, addDummyJob);
 router.post('/add-job', authenticateToken, addJob);

@@ -18,6 +18,7 @@ const actualDb = getFirestore(db);
 // uuid
 const { v4: uuidv4 } = require('uuid');
 
+// function to embed timestamp when needed
 const giveCurrentDateTime = () => {
   const today = new Date();
   const date =
@@ -29,17 +30,13 @@ const giveCurrentDateTime = () => {
 };
 
 // to add dummy datas from a json file,
-// problem at userId, the jobs will be unique but the user is only one guy
+// we need this because we don't have real users,
+// we need real users to get better results from
+// machine learning recommendation system.
 const addDummyJob = async (req, res) => {
   try {
     const currentDateTime = giveCurrentDateTime();
     const data = req.body;
-
-    // console.log(data[1].id);
-
-    // data.forEach(async (datas) => {
-    //   console.log(datas.id);
-    // });
 
     data.forEach(async (datas) => {
       const jobDoc = doc(actualDb, 'jobs', datas.id);
@@ -53,7 +50,8 @@ const addDummyJob = async (req, res) => {
   }
 };
 
-// post to ml
+// util function to help getJobPreference post "job" datas to our
+// machine learning recommendation system
 const postToML = async (data) => {
   const postToMLdatas = {
     method: 'POST',
@@ -75,7 +73,7 @@ const postToML = async (data) => {
   }
 };
 
-// get jobs preferences
+// returns jobs preferences based on "job" datas
 const getJobPreference = async (req, res) => {
   try {
     const data = req.body;
@@ -122,6 +120,9 @@ const getJobPreference = async (req, res) => {
   }
 };
 
+// add "job" datas for a user
+// some of these datas will be directed to
+// ml recommendation system
 const addJob = async (req, res) => {
   try {
     const uuid = uuidv4();
@@ -137,6 +138,7 @@ const addJob = async (req, res) => {
   }
 };
 
+// returns "job" datas added from addJob function
 const getJobId = async (req, res) => {
   try {
     const jobId = req.params.id;
@@ -176,6 +178,8 @@ const getJobId = async (req, res) => {
   }
 };
 
+// a user can have multiple "job" datas (therefore multiple preferences),
+// this function returns all of them
 const getAllJobOfOneUser = async (req, res) => {
   try {
     const { userId } = req.query;
@@ -226,6 +230,7 @@ const getAllJobOfOneUser = async (req, res) => {
   }
 };
 
+// updates "job" datas that was added with addJob function
 const updateJob = async (req, res) => {
   try {
     const jobId = req.params.id;
@@ -244,6 +249,7 @@ const updateJob = async (req, res) => {
   }
 };
 
+// deletes "job" datas that was added with addJob function
 const deleteJob = async (req, res) => {
   try {
     const jobId = req.params.id;
@@ -261,6 +267,7 @@ const deleteJob = async (req, res) => {
   }
 };
 
+// deletes all "job" datas that was added with addJob function
 const deleteAllJobOfOneUser = async (req, res) => {
   try {
     const { userId } = req.query;
