@@ -2,6 +2,8 @@
 
 ### Deployed Link: https://skillify-ml-webservice-boq7zjhvoq-et.a.run.app/predict
 
+If you want to consume the endpoint, refer to the API documentation, do not use the link above. [API Docs link](https://skillify-backend-boq7zjhvoq-et.a.run.app/documentation)
+
 ## Project Description
 
 This documentation serves as a comprehensive guide for the machine learning project titled `Job Recommendation System using Tensorflow Neural Network`. The project aims to provide a personalized list of job recommendations based on user preferences such as location, career level, education level, and more.
