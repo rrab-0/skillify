@@ -1,5 +1,7 @@
 # Machine Learning Project Documentation
 
+### Deployed Link: https://skillify-ml-webservice-boq7zjhvoq-et.a.run.app/predict
+
 ## Project Description
 
 This documentation serves as a comprehensive guide for the machine learning project titled `Job Recommendation System using Tensorflow Neural Network`. The project aims to provide a personalized list of job recommendations based on user preferences such as location, career level, education level, and more.
@@ -98,3 +100,21 @@ We can observe that the recommended job listings align with the user's preferenc
 To deploy the machine learning model, we utilize Flask to easily handle user input processing using Python. We collaborate with our cloud computing team to deploy the model on the cloud. The DataFrame output is converted to JSON format. Here is an example of calling the API using Postman:
 
 ![api_call_postman](/Machine%20Learning/image/api_call_postman.png)
+
+### How to deploy to cloud run
+
+#### `login to console.cloud.google.com`
+
+Login to google cloud's console, then open their cloud shell
+
+#### `git clone https://github.com/rrab-0/skillify.git`
+
+Clone our application's repository
+
+#### `cd skillify/Machine\ Learning/`
+
+Change to "Cloud Computing" directory
+
+#### `gcloud run deploy`
+
+After this process is completed, you will get the URL.

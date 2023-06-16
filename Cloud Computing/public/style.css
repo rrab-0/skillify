@@ -104,3 +104,9 @@ body {
 .delete-method {
   color: var(--red);
 }
+
+.job-preferences-span {
+  font-size: smaller;
+  font-weight: 400;
+  padding-left: 1em;
+}

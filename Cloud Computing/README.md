@@ -5,11 +5,13 @@
 ### API Documentation Link: https://skillify-backend-boq7zjhvoq-et.a.run.app/documentation
 
 ## Tech Stack
+
 - **Back-End**: Express.js
 - **Database**: Firestore + Firebase's Cloud Storage
 - **Deployment**: Google Cloud Run
 
 ## Back-End Depedency
+
 - Multer
 - Bcrypt
 - Cors
@@ -28,6 +30,10 @@ Pertama, install seluruh depedency yang digunakan terlebih dahulu menggunakan `n
 Setelah dependency berhasil diinstall, gunakan command `npm run start` untuk memulai program. Server akan berjalan di `localhost:8080`.
 
 ## How to deploy to cloud run
+
+### `login to console.cloud.google.com`
+
+Login to google cloud's console, then open their cloud shell
 
 ### `git clone https://github.com/rrab-0/skillify.git`
 
@@ -73,5 +79,3 @@ Cloud Computing
     └───style.css
 
 ```
-
-
